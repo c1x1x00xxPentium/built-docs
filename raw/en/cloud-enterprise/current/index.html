@@ -235,8 +235,6 @@
 <ul>
 <li><span class="chapter"><a href="ece-monitoring-ece-access.html">Access logs and metrics</a></span>
 </li>
-<li><span class="chapter"><a href="ece-capture-heap-dumps.html">Capture heap dumps</a></span>
-</li>
 <li><span class="chapter"><a href="ece-monitoring-ece-set-retention.html">Set the retention period for logging and metrics indices</a></span>
 </li>
 <li><span class="chapter"><a href="ece-monitoring-ece-proxies.html">Scenario: Knowing when you need more proxies</a></span>
@@ -389,6 +387,8 @@
 <ul>
 <li><span class="section"><a href="ece-find.html">Finding deployments, finding problems</a></span>
 </li>
+<li><span class="section"><a href="ece-deployment-no-op.html">Scenario: How do I resolve deployment health warnings?</a></span>
+</li>
 </ul>
 </li>
 <li><span class="chapter"><a href="ece-securing-clusters.html">Secure your clusters</a></span>
@@ -427,11 +427,15 @@
 </li>
 <li><span class="chapter"><a href="ece-trust-management.html">Trust management</a></span>
 </li>
+<li><span class="chapter"><a href="ece-capture-heap-dumps.html">Deployment heap dumps</a></span>
+</li>
 <li><span class="chapter"><a href="ece-traffic-filtering-deployment-configuration.html">Traffic Filtering</a></span>
 <ul>
 <li><span class="section"><a href="ece-traffic-filtering-ip.html">IP traffic filters</a></span>
 </li>
-<li><span class="section"><a href="ece-traffic-filtering-vpc.html">Private link traffic filters</a></span>
+<li><span class="section"><a href="ece-traffic-filtering-vpc.html">AWS Privatelink traffic filters</a></span>
+</li>
+<li><span class="section"><a href="ece-traffic-filtering-vnet.html">Azure Private Link traffic filters</a></span>
 </li>
 </ul>
 </li>
@@ -610,6 +614,18 @@
 <li><span class="section"><a href="delete-user-api-key.html">Delete an API key for a user</a></span>
 </li>
 <li><span class="section"><a href="get-user-api-key.html">Get a user API key</a></span>
+</li>
+</ul>
+</li>
+<li><span class="section"><a href="Billing_Costs_Analysis.html">Billing Costs Analysis</a></span>
+<ul>
+<li><span class="section"><a href="get-costs-overview.html">Get costs overview for the organization</a></span>
+</li>
+<li><span class="section"><a href="get-costs-deployments.html">Get deployments costs for the organization</a></span>
+</li>
+<li><span class="section"><a href="get-costs-items-by-deployment.html">Get itemized costs by deployments</a></span>
+</li>
+<li><span class="section"><a href="get-costs-items.html">Get itemized costs for the organization</a></span>
 </li>
 </ul>
 </li>
@@ -811,6 +827,18 @@
 </li>
 </ul>
 </li>
+<li><span class="section"><a href="Clusters_-_Enterprise_Search_-_Proxy.html">Clusters - Enterprise Search - Proxy</a></span>
+<ul>
+<li><span class="section"><a href="delete-enterprise-search-proxy-requests.html">Proxy HTTP DELETE request</a></span>
+</li>
+<li><span class="section"><a href="get-enterprise-search-proxy-requests.html">Proxy HTTP GET request</a></span>
+</li>
+<li><span class="section"><a href="post-enterprise-search-proxy-requests.html">Proxy HTTP POST request</a></span>
+</li>
+<li><span class="section"><a href="put-enterprise-search-proxy-requests.html">Proxy HTTP PUT request</a></span>
+</li>
+</ul>
+</li>
 <li><span class="section"><a href="Clusters_-_Kibana_-_CRUD.html">Clusters - Kibana - CRUD</a></span>
 <ul>
 <li><span class="section"><a href="get-kibana-clusters.html">Get clusters</a></span>
@@ -949,6 +977,8 @@
 </li>
 <li><span class="section"><a href="shutdown-deployment-es-resource.html">Shutdown Deployment Elasticsearch Resource</a></span>
 </li>
+<li><span class="section"><a href="get-deployment-heap-dumps.html">Get details about heap dumps for a Deployment</a></span>
+</li>
 <li><span class="section"><a href="start-deployment-resource-instances-all.html">Start all instances</a></span>
 </li>
 <li><span class="section"><a href="stop-deployment-resource-instances-all.html">Stop all instances</a></span>
@@ -964,6 +994,10 @@
 <li><span class="section"><a href="start-deployment-resource-maintenance-mode.html">Start maintenance mode</a></span>
 </li>
 <li><span class="section"><a href="stop-deployment-resource-maintenance-mode.html">Stop maintenance mode</a></span>
+</li>
+<li><span class="section"><a href="capture-deployment-instance-heap-dump.html">Capture a new on-demand heap dump for the given instance</a></span>
+</li>
+<li><span class="section"><a href="download-deployment-instance-heap-dump.html">Download the given instance&#8217;s heap dump</a></span>
 </li>
 <li><span class="section"><a href="restart-deployment-stateless-resource.html">Restart Deployment Stateless Resource</a></span>
 </li>
@@ -1617,6 +1651,8 @@
 </li>
 <li><span class="section"><a href="AvailableAuthenticationMethods.html"><code class="literal">AvailableAuthenticationMethods</code></a></span>
 </li>
+<li><span class="section"><a href="Balance.html"><code class="literal">Balance</code></a></span>
+</li>
 <li><span class="section"><a href="BasicFailedReply.html"><code class="literal">BasicFailedReply</code></a></span>
 </li>
 <li><span class="section"><a href="BasicFailedReplyElement.html"><code class="literal">BasicFailedReplyElement</code></a></span>
@@ -1630,6 +1666,8 @@
 <li><span class="section"><a href="BoolQuery.html"><code class="literal">BoolQuery</code></a></span>
 </li>
 <li><span class="section"><a href="CapacityConstraintsResource.html"><code class="literal">CapacityConstraintsResource</code></a></span>
+</li>
+<li><span class="section"><a href="ChainStatus.html"><code class="literal">ChainStatus</code></a></span>
 </li>
 <li><span class="section"><a href="ChangeSourceInfo.html"><code class="literal">ChangeSourceInfo</code></a></span>
 </li>
@@ -1743,6 +1781,10 @@
 </li>
 <li><span class="section"><a href="CoordinatorsSummary.html"><code class="literal">CoordinatorsSummary</code></a></span>
 </li>
+<li><span class="section"><a href="Costs.html"><code class="literal">Costs</code></a></span>
+</li>
+<li><span class="section"><a href="CostsOverview.html"><code class="literal">CostsOverview</code></a></span>
+</li>
 <li><span class="section"><a href="CreateApiKeyRequest.html"><code class="literal">CreateApiKeyRequest</code></a></span>
 </li>
 <li><span class="section"><a href="CreateApmInCreateElasticsearchRequest.html"><code class="literal">CreateApmInCreateElasticsearchRequest</code></a></span>
@@ -1773,6 +1815,8 @@
 </li>
 <li><span class="section"><a href="DeleteUsersApiKeysRequest.html"><code class="literal">DeleteUsersApiKeysRequest</code></a></span>
 </li>
+<li><span class="section"><a href="DeploymentCosts.html"><code class="literal">DeploymentCosts</code></a></span>
+</li>
 <li><span class="section"><a href="DeploymentCreateMetadata.html"><code class="literal">DeploymentCreateMetadata</code></a></span>
 </li>
 <li><span class="section"><a href="DeploymentCreateRequest.html"><code class="literal">DeploymentCreateRequest</code></a></span>
@@ -1790,6 +1834,8 @@
 <li><span class="section"><a href="DeploymentDomainName.html"><code class="literal">DeploymentDomainName</code></a></span>
 </li>
 <li><span class="section"><a href="DeploymentGetResponse.html"><code class="literal">DeploymentGetResponse</code></a></span>
+</li>
+<li><span class="section"><a href="DeploymentHeapDumps.html"><code class="literal">DeploymentHeapDumps</code></a></span>
 </li>
 <li><span class="section"><a href="DeploymentLogging.html"><code class="literal">DeploymentLogging</code></a></span>
 </li>
@@ -1843,6 +1889,8 @@
 </li>
 <li><span class="section"><a href="DeploymentUpdateSettings.html"><code class="literal">DeploymentUpdateSettings</code></a></span>
 </li>
+<li><span class="section"><a href="DeploymentsCosts.html"><code class="literal">DeploymentsCosts</code></a></span>
+</li>
 <li><span class="section"><a href="DeploymentsListResponse.html"><code class="literal">DeploymentsListResponse</code></a></span>
 </li>
 <li><span class="section"><a href="DeploymentsListingData.html"><code class="literal">DeploymentsListingData</code></a></span>
@@ -1852,6 +1900,12 @@
 <li><span class="section"><a href="DeprecatedElasticsearchClusterSettings.html"><code class="literal">DeprecatedElasticsearchClusterSettings</code></a></span>
 </li>
 <li><span class="section"><a href="DiscreteSizes.html"><code class="literal">DiscreteSizes</code></a></span>
+</li>
+<li><span class="section"><a href="DtsDimensionCosts.html"><code class="literal">DtsDimensionCosts</code></a></span>
+</li>
+<li><span class="section"><a href="DtsQuantity.html"><code class="literal">DtsQuantity</code></a></span>
+</li>
+<li><span class="section"><a href="DtsRate.html"><code class="literal">DtsRate</code></a></span>
 </li>
 <li><span class="section"><a href="Elasticsearch.html"><code class="literal">Elasticsearch</code></a></span>
 </li>
@@ -1981,6 +2035,8 @@
 </li>
 <li><span class="section"><a href="GrowShrinkStrategyConfig.html"><code class="literal">GrowShrinkStrategyConfig</code></a></span>
 </li>
+<li><span class="section"><a href="HeapDump.html"><code class="literal">HeapDump</code></a></span>
+</li>
 <li><span class="section"><a href="Hyperlink.html"><code class="literal">Hyperlink</code></a></span>
 </li>
 <li><span class="section"><a href="IdResponse.html"><code class="literal">IdResponse</code></a></span>
@@ -2004,6 +2060,10 @@
 <li><span class="section"><a href="IpFilterRulesets.html"><code class="literal">IpFilterRulesets</code></a></span>
 </li>
 <li><span class="section"><a href="IpFilteringSettings.html"><code class="literal">IpFilteringSettings</code></a></span>
+</li>
+<li><span class="section"><a href="ItemCosts.html"><code class="literal">ItemCosts</code></a></span>
+</li>
+<li><span class="section"><a href="ItemsCosts.html"><code class="literal">ItemsCosts</code></a></span>
 </li>
 <li><span class="section"><a href="KeystoreContents.html"><code class="literal">KeystoreContents</code></a></span>
 </li>
@@ -2131,6 +2191,8 @@
 </li>
 <li><span class="section"><a href="PendingStatesWithMeta.html"><code class="literal">PendingStatesWithMeta</code></a></span>
 </li>
+<li><span class="section"><a href="Period.html"><code class="literal">Period</code></a></span>
+</li>
 <li><span class="section"><a href="PlanStrategy.html"><code class="literal">PlanStrategy</code></a></span>
 </li>
 <li><span class="section"><a href="PlatformInfo.html"><code class="literal">PlatformInfo</code></a></span>
@@ -2211,6 +2273,8 @@
 </li>
 <li><span class="section"><a href="RequestEnrollmentTokenReply.html"><code class="literal">RequestEnrollmentTokenReply</code></a></span>
 </li>
+<li><span class="section"><a href="ResourceHeapDumps.html"><code class="literal">ResourceHeapDumps</code></a></span>
+</li>
 <li><span class="section"><a href="RestartPolicy.html"><code class="literal">RestartPolicy</code></a></span>
 </li>
 <li><span class="section"><a href="RestoreSnapshotApiConfiguration.html"><code class="literal">RestoreSnapshotApiConfiguration</code></a></span>
@@ -2280,6 +2344,8 @@
 <li><span class="section"><a href="SecurityRealmsReorderRequest.html"><code class="literal">SecurityRealmsReorderRequest</code></a></span>
 </li>
 <li><span class="section"><a href="ServiceUrl.html"><code class="literal">ServiceUrl</code></a></span>
+</li>
+<li><span class="section"><a href="SimplifiedLineItem.html"><code class="literal">SimplifiedLineItem</code></a></span>
 </li>
 <li><span class="section"><a href="SnapshotRepositoryConfiguration.html"><code class="literal">SnapshotRepositoryConfiguration</code></a></span>
 </li>

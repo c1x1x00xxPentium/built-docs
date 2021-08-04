@@ -1,9 +1,10 @@
-POST _render/template
+POST /index_long,index_double/_search
 {
-  "source": "{ \"query\": {{#toJson}}my_query{{/toJson}} }",
-  "params": {
-    "my_query": {
-      "match_all": { }
-    }
-  }
+   "sort" : [
+      {
+        "field" : {
+            "numeric_type" : "date_nanos"
+        }
+      }
+   ]
 }

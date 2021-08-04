@@ -1,28 +1,3 @@
-PUT bicycles
-{
-  "mappings": {
-    "properties": {
-      "cycle_type": {
-        "type": "constant_keyword",
-        "value": "bicycle"
-      },
-      "name": {
-        "type": "text"
-      }
-    }
-  }
-}
+GET my-index/_settings?flat_settings=true&include_defaults=true
 
-PUT other_cycles
-{
-  "mappings": {
-    "properties": {
-      "cycle_type": {
-        "type": "keyword"
-      },
-      "name": {
-        "type": "text"
-      }
-    }
-  }
-}
+GET _cluster/settings?flat_settings=true&include_defaults=true

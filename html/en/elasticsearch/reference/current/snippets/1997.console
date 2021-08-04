@@ -1,7 +1,6 @@
-GET /my-index-000001/_termvectors
+GET /my-data-stream/_eql/search
 {
-  "doc" : {
-    "fullname" : "John Doe",
-    "text" : "test test test"
-  }
+  "query": """
+    process where (process.name == "cmd.exe" and process.pid != 2013)
+  """
 }

@@ -32,16 +32,16 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ec-configure-index-management"></a>Configure index management<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-60/docs/shared/ec-ce-getting-started-configure-index-management.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ec-configure-index-management"></a>Configure index management<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-getting-started-configure-index-management.asciidoc">edit</a></h2>
 </div></div></div>
 <p>For time-series use cases such as logging, metrics, and APM, you typically store data in time-based indexes. As this data ages, practicing good index management ensures that your data is being stored in the most cost-effective way possible. In practical terms this means that, if you customize a deployment that includes more than one data configuration, you must also specify how Elasticsearch Service should manage your indices.</p>
 <p>In a hot-warm architecture, you can use index curation to specify where new indices are created initially and where they are moved to later on. However, index curation has been deprecated in favor of index lifecycle management (ILM), which offers additional features and more fine-grained control over indices. For instance, using ILM you can enable automatic roll-over of index aliases to new indices when existing indices become too large or too old, and you can set indices to be deleted when they are no longer useful.</p>
-<h4><a id="ec_before_you_begin"></a>Before you begin<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-60/docs/shared/ec-ce-getting-started-configure-index-management.asciidoc">edit</a></h4>
+<h4><a id="ec_before_you_begin"></a>Before you begin<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-getting-started-configure-index-management.asciidoc">edit</a></h4>
 <p>Configuring index management is part of the larger task of
 <a class="xref" href="ec-create-deployment.html" title="Create your deployment">creating deployments</a> and customizing them.
 Which index management methods are available to you depends on which version of the Elastic Stack you are using. Index lifecycle management (ILM) requires that you use version 6.7 or later and is the new default index management method. For versions before 6.7, index curations is the only available method to manage your indices. Starting with version 7.8, we strongly encourage using ILM to avoid the potential for unpredictable behavior. Elasticsearch from that version and later runs with the ILM API always enabled, and other stack products and features provide default policies.</p>
 <p>For Elasticsearch Service, there are enough data configurations available to create an index lifecycle policy that covers the hot and warm phases and you can also make use of the delete phase, along with several other features of ILM.</p>
-<h4><a id="ec_steps"></a>Steps<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-60/docs/shared/ec-ce-getting-started-configure-index-management.asciidoc">edit</a></h4>
+<h4><a id="ec_steps"></a>Steps<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-getting-started-configure-index-management.asciidoc">edit</a></h4>
 <p>To configure index management when you customize a new deployment:</p>
 <div class="olist orderedlist">
 <ol class="orderedlist">
@@ -86,31 +86,31 @@ Enter a name for your policy.
 <ul class="itemizedlist">
 <li class="listitem">
 <span class="strong strong"><strong>Hot.</strong></span> The index is actively being queried and written to. You can
-roll over to a new index when the original index reaches a specified size, document count, or age.  When a rollover occurs, a new index is created, added to the index alias, and designated as the new hot index. You can still query the previous indices, but you only ever write to the hot index. For more information, see <a href="/guide/en/elasticsearch/reference/7.14/index-rollover.html" class="ulink" target="_top">Rollover</a> and <a href="/guide/en/elasticsearch/reference/7.14/getting-started-index-lifecycle-management.html" class="ulink" target="_top">Tutorial: Automate rollover with ILM</a>.
+roll over to a new index when the original index reaches a specified size, document count, or age.  When a rollover occurs, a new index is created, added to the index alias, and designated as the new hot index. You can still query the previous indices, but you only ever write to the hot index. For more information, see <a href="/guide/en/elasticsearch/reference/7.13/index-rollover.html" class="ulink" target="_top">Rollover</a> and <a href="/guide/en/elasticsearch/reference/7.13/getting-started-index-lifecycle-management.html" class="ulink" target="_top">Tutorial: Automate rollover with ILM</a>.
 </li>
 <li class="listitem">
-<span class="strong strong"><strong>Warm.</strong></span> The index is typically searched at a lower rate than when the data is hot. The index is not used for storing new data, but might occasionally add late-arriving data, for example, from a Beat with a network problem that&#8217;s now fixed. You can optionally shrink the number replicas and move the shards to a different set of nodes with smaller or less performant hardware. You can also reduce the number of primary shards and force merge the index into smaller <a href="/guide/en/elasticsearch/reference/7.14/indices-segments.html" class="ulink" target="_top">segments</a>.
+<span class="strong strong"><strong>Warm.</strong></span> The index is typically searched at a lower rate than when the data is hot. The index is not used for storing new data, but might occasionally add late-arriving data, for example, from a Beat with a network problem that&#8217;s now fixed. You can optionally shrink the number replicas and move the shards to a different set of nodes with smaller or less performant hardware. You can also reduce the number of primary shards and force merge the index into smaller <a href="/guide/en/elasticsearch/reference/7.13/indices-segments.html" class="ulink" target="_top">segments</a>.
 </li>
 <li class="listitem">
-<span class="strong strong"><strong>Cold.</strong></span> The index is no longer being updated and is seldom queried, but is still searchable. If you have a big deployment, you can move it to even less performant hardware. You might also reduce the number of replicas because you expect the data to be queried less frequently. To keep the index searchable for a longer period, and reduce the hardware requirements, you can use the <a href="/guide/en/elasticsearch/reference/7.14/frozen-indices.html" class="ulink" target="_top">freeze action</a>. Queries are slower on a frozen index because the index is reloaded from the disk to RAM on demand.
+<span class="strong strong"><strong>Cold.</strong></span> The index is no longer being updated and is seldom queried, but is still searchable. If you have a big deployment, you can move it to even less performant hardware. You might also reduce the number of replicas because you expect the data to be queried less frequently. To keep the index searchable for a longer period, and reduce the hardware requirements, you can use the <a href="/guide/en/elasticsearch/reference/7.13/frozen-indices.html" class="ulink" target="_top">freeze action</a>. Queries are slower on a frozen index because the index is reloaded from the disk to RAM on demand.
 </li>
 <li class="listitem">
 <span class="strong strong"><strong>Delete.</strong></span> The index is no longer relevant. You can define when it is safe to delete it.
 </li>
 </ul>
 </div>
-<p>The index lifecycle always includes an active hot phase. The warm, cold, and delete phases are optional. For example, you might define all four phases for one policy and only a hot and delete phase for another. See <a href="/guide/en/elasticsearch/reference/7.14/_actions.html" class="ulink" target="_top">Actions</a> for more information on the actions available in each phase.</p>
+<p>The index lifecycle always includes an active hot phase. The warm, cold, and delete phases are optional. For example, you might define all four phases for one policy and only a hot and delete phase for another. See <a href="/guide/en/elasticsearch/reference/7.13/_actions.html" class="ulink" target="_top">Actions</a> for more information on the actions available in each phase.</p>
 <p>There are additional benefits to ILM, such as integration with cross-cluster search, which lets you to auto-unfollow read-only indices. You can also set the recovery priority action, so that newer indices recover faster than older ones. To learn more about creating lifecycle policies and about all of the features that are available with ILM, see:</p>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-<a href="/guide/en/kibana/7.14/creating-index-lifecycle-policies.html" class="ulink" target="_top">Create your index lifecyle policy in Kibana</a>
+<a href="/guide/en/kibana/7.13/creating-index-lifecycle-policies.html" class="ulink" target="_top">Create your index lifecyle policy in Kibana</a>
 </li>
 <li class="listitem">
-<a href="/guide/en/elasticsearch/reference/7.14/index-lifecycle-management.html" class="ulink" target="_top">Managing the index lifecycle</a>
+<a href="/guide/en/elasticsearch/reference/7.13/index-lifecycle-management.html" class="ulink" target="_top">Managing the index lifecycle</a>
 </li>
 <li class="listitem">
-<a href="/guide/en/elasticsearch/reference/7.14/index-lifecycle-management-api.html" class="ulink" target="_top">Index lifecycle management API</a>
+<a href="/guide/en/elasticsearch/reference/7.13/index-lifecycle-management-api.html" class="ulink" target="_top">Index lifecycle management API</a>
 </li>
 </ul>
 </div>

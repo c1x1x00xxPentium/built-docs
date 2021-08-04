@@ -1,1 +1,1 @@
-GET _tasks?group_by=none
+GET /_ccr/auto_follow/<auto_follow_pattern_name>

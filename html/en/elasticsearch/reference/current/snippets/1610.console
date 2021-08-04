@@ -1,4 +1,6 @@
-POST /_security/saml/prepare
+PUT /2015
 {
-  "realm" : "saml1"
+  "aliases": {
+    "current_year": {}
+  }
 }

@@ -1,7 +1,11 @@
-POST test/_update/1
+GET /test/_doc/_mget
 {
-  "doc": {
-    "name": "new_name"
-  },
-  "detect_noop": false
+  "docs": [
+    {
+      "_id": "1"
+    },
+    {
+      "_id": "2"
+    }
+  ]
 }

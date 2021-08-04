@@ -1,6 +1,5 @@
-GET /_search?scroll=1m
+POST my-index-000001/_search
 {
-  "sort": [
-    "_doc"
-  ]
+  "fields": ["user.first"],
+  "_source": false
 }

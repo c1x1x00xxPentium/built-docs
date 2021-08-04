@@ -1,5 +1,14 @@
-POST /_security/user/facilitator
+POST /_security/role/example3
 {
-  "password" : "<somePasswordHere>",
-  "roles"    : [ "facilitator-role"]
+  "indices" : [
+    {
+      "names" : [ "my-index-000001" ],
+      "privileges" : [ "read" ],
+      "query" : {
+        "template" : {
+          "source" : "{ \"terms\": { \"group.statuses\": {{#toJson}}_user.metadata.statuses{{/toJson}} }}"
+        }
+      }
+    }
+  ]
 }

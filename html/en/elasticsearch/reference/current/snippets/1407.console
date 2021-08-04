@@ -1,4 +1,9 @@
-PUT my-index-000001/_doc/1
+GET my-index/_search
 {
-  "my_field": 5
+  "query": {
+    "match": {
+      "http.response": "304"
+    }
+  },
+  "fields" : ["http.response"]
 }

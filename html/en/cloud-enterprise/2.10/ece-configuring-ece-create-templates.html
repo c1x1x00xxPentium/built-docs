@@ -128,14 +128,14 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ece-configuring-ece-create-templates"></a>Create deployment templates<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ece-configuring-ece-create-templates"></a>Create deployment templates<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h2>
 </div></div></div>
 <p>Elastic Cloud Enterprise comes with some deployment templates already built in, but you can create new deployment templates to address particular use cases that you might have.</p>
 <p>For example: You might decide to create a new deployment template, if you have a specific search use case that requires Elasticsearch data nodes in a specific configuration that also includes machine learning for anomaly detection. If you need to create these deployments fairly frequently, you can create a deployment template once and deploy it as many times as you like. Or, create a single template for both your test and production deployments to ensure they are exactly the same.</p>
-<h3><a id="ece_before_you_begin_3"></a>Before you begin<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
+<h3><a id="ece_before_you_begin_3"></a>Before you begin<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
 <p>Before you start creating your own deployment templates, you should have:
 <a class="xref" href="ece-configuring-ece-tag-allocators.html" title="Tag your allocators">tagged your allocators</a> to tell ECE what kind of hardware you have available for Elastic Stack deployments. If the default instance configurations don&#8217;t provide what you need, you might also need to <a class="xref" href="ece-configuring-ece-instance-configurations-create.html" title="Create instance configurations">create your own instance configurations</a> first.</p>
-<h3><a id="ece_create_deployment_templates_in_the_ui"></a>Create deployment templates in the UI<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
+<h3><a id="ece_create_deployment_templates_in_the_ui"></a>Create deployment templates in the UI<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
 <div class="olist orderedlist">
 <ol class="orderedlist">
 <li class="listitem">
@@ -210,114 +210,352 @@ Click <span class="strong strong"><strong>Save and create template</strong></spa
 </li>
 </ol>
 </div>
-<h3><a id="ece_create_deployment_templates_through_the_restful_api"></a>Create deployment templates through the RESTful API:<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
+<h3><a id="ece_create_deployment_templates_through_the_restful_api"></a>Create deployment templates through the RESTful API:<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
 <div class="olist orderedlist">
 <ol class="orderedlist">
 <li class="listitem">
 <p>Obtain the existing deployment templates to see some examples of what the required JSON looks like. You can take the JSON for one of the existing templates and modify it to create a new template, similar to what gets shown in the next step.</p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">curl -k -X GET -H "Authorization: ApiKey $ECE_API_KEY" https://COORDINATOR_HOST:12443/api/v1/platform/configuration/templates/deployments</pre>
+<pre class="programlisting prettyprint lang-sh">curl -k -X GET -H "Authorization: ApiKey $ECE_API_KEY" https://COORDINATOR_HOST:12443/api/v1/deployments/templates?region=ece-region</pre>
 </div>
 </li>
 <li class="listitem">
 <p>Post the JSON for your new deployment template.</p>
-<p>The following example creates a deployment template that defaults to a highly available Elasticsearch cluster with 4 GB per node, a 16 GB machine learning node, 3 dedicated master nodes of 1 GB each, a 1 GB Kibana instance, and a 1 GB dedicated coordinating node that is tasked with handling and coordinating all incoming requests for the cluster. Elasticsearch and Kibana use the default instance configurations, but the machine learning node is based on the custom instance configuration in our previous example.</p>
+<p>The following example creates a deployment template that defaults to a highly available Elasticsearch cluster with 4 GB per hot node, a 16 GB machine learning node, 3 dedicated master nodes of 1 GB each, a 1 GB Kibana instance, and a 1 GB dedicated coordinating node that is tasked with handling and coordinating all incoming requests for the cluster. Elasticsearch and Kibana use the default instance configurations, but the machine learning node is based on the custom instance configuration in our previous example.</p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">curl -k -X POST -H "Authorization: ApiKey $ECE_API_KEY" https://$COORDINATOR_HOST:12443/api/v1/platform/configuration/templates/deployments/ -H 'content-type: application/json' -d '{
-  "name": "Custom Elasticsearch and ML template",
-  "description": "Custom template that includes Elasticsearch, with dedicated master and coordinating nodes, machine learning, and Kibana",
-  "cluster_template": {
-    "plan": {
-      "cluster_topology": [{
-        "size": {
-          "value": 4096,
-          "resource": "memory"
-        },
-        "node_type": {
-          "master": true,
-          "data": true,
-          "ingest": true
-        },
-        "instance_configuration_id": "data.default",
-        "elasticsearch": {
-          "user_settings_yaml": "",
-          "node_attributes": {
-
+<pre class="programlisting prettyprint lang-sh">curl -k -X POST -H "Authorization: ApiKey $ECE_API_KEY" https://$COORDINATOR_HOST:12443/api/v1/deployments/templates?region=ece-region -H 'content-type: application/json' -d '{
+    "name" : "Default",
+    "description" : "Default deployment template for clusters",
+    "deployment_template": {
+      "resources": {
+        "elasticsearch": [
+          {
+            "ref_id": "es-ref-id",
+            "region": "ece-region",
+            "plan": {
+              "cluster_topology": [
+                {
+                  "node_type": {
+                    "master": true,
+                    "data": true,
+                    "ingest": true
+                  },
+                  "zone_count": 1,
+                  "instance_configuration_id": "data.default",
+                  "size": {
+                    "value": 4096,
+                    "resource": "memory"
+                  },
+                  "node_roles": [
+                    "master",
+                    "ingest",
+                    "data_hot",
+                    "data_content",
+                    "remote_cluster_client",
+                    "transform"
+                  ],
+                  "id": "hot_content",
+                  "elasticsearch": {
+                    "node_attributes": {
+                      "data": "hot"
+                    }
+                  },
+                  "topology_element_control": {
+                    "min": {
+                      "value": 1024,
+                      "resource": "memory"
+                    }
+                  },
+                  "autoscaling_max": {
+                    "value": 2097152,
+                    "resource": "memory"
+                  }
+                },
+                {
+                  "node_type": {
+                    "data": true,
+                    "ingest": false,
+                    "master": false
+                  },
+                  "instance_configuration_id": "data.highstorage",
+                  "zone_count": 1,
+                  "size": {
+                    "resource": "memory",
+                    "value": 0
+                  },
+                  "node_roles": [
+                    "data_warm",
+                    "remote_cluster_client"
+                  ],
+                  "id": "warm",
+                  "elasticsearch": {
+                    "node_attributes": {
+                      "data": "warm"
+                    }
+                  },
+                  "topology_element_control": {
+                    "min": {
+                      "value": 0,
+                      "resource": "memory"
+                    }
+                  },
+                  "autoscaling_max": {
+                    "value": 2097152,
+                    "resource": "memory"
+                  }
+                },
+                {
+                  "node_type": {
+                    "data": true,
+                    "ingest": false,
+                    "master": false
+                  },
+                  "instance_configuration_id": "data.highstorage",
+                  "zone_count": 1,
+                  "size": {
+                    "resource": "memory",
+                    "value": 0
+                  },
+                  "node_roles": [
+                    "data_cold",
+                    "remote_cluster_client"
+                  ],
+                  "id": "cold",
+                  "elasticsearch": {
+                    "node_attributes": {
+                      "data": "cold"
+                    }
+                  },
+                  "topology_element_control": {
+                    "min": {
+                      "value": 0,
+                      "resource": "memory"
+                    }
+                  },
+                  "autoscaling_max": {
+                    "value": 2097152,
+                    "resource": "memory"
+                  }
+                },
+                {
+                  "node_type": {
+                    "data": true,
+                    "ingest": false,
+                    "master": false
+                  },
+                  "instance_configuration_id": "data.frozen",
+                  "zone_count": 1,
+                  "size": {
+                    "resource": "memory",
+                    "value": 0
+                  },
+                  "node_roles": [
+                    "data_frozen"
+                  ],
+                  "id": "frozen",
+                  "elasticsearch": {
+                    "node_attributes": {
+                      "data": "frozen"
+                    }
+                  },
+                  "topology_element_control": {
+                    "min": {
+                      "value": 0,
+                      "resource": "memory"
+                    }
+                  },
+                  "autoscaling_max": {
+                    "value": 2097152,
+                    "resource": "memory"
+                  }
+                },
+                {
+                  "node_type": {
+                    "master": false,
+                    "data": false,
+                    "ingest": true
+                  },
+                  "zone_count": 1,
+                  "instance_configuration_id": "coordinating",
+                  "size": {
+                    "value": 1024,
+                    "resource": "memory"
+                  },
+                  "node_roles": [
+                    "ingest",
+                    "remote_cluster_client"
+                  ],
+                  "id": "coordinating",
+                  "topology_element_control": {
+                    "min": {
+                      "value": 0,
+                      "resource": "memory"
+                    }
+                  }
+                },
+                {
+                  "node_type": {
+                    "master": true,
+                    "data": false,
+                    "ingest": false
+                  },
+                  "zone_count": 3,
+                  "instance_configuration_id": "master",
+                  "size": {
+                    "value": 1024,
+                    "resource": "memory"
+                  },
+                  "node_roles": [
+                    "master",
+                    "remote_cluster_client"
+                  ],
+                  "id": "master",
+                  "topology_element_control": {
+                    "min": {
+                      "value": 0,
+                      "resource": "memory"
+                    }
+                  }
+                },
+                {
+                  "node_type": {
+                    "master": false,
+                    "data": false,
+                    "ingest": false,
+                    "ml": true
+                  },
+                  "zone_count": 1,
+                  "instance_configuration_id": "ml",
+                  "size": {
+                    "value": 0,
+                    "resource": "memory"
+                  },
+                  "node_roles": [
+                    "ml",
+                    "remote_cluster_client"
+                  ],
+                  "id": "ml",
+                  "topology_element_control": {
+                    "min": {
+                      "value": 16384,
+                      "resource": "memory"
+                    }
+                  },
+                  "autoscaling_min": {
+                    "resource": "memory",
+                    "value": 16384
+                  },
+                  "autoscaling_max": {
+                    "value": 2097152,
+                    "resource": "memory"
+                  }
+                }
+              ],
+              "elasticsearch": {},
+              "autoscaling_enabled": false
+            },
+            "settings": {
+              "dedicated_masters_threshold": 3
+            }
           }
-        },
-        "zone_count": 3
-      }, {
-        "size": {
-          "value": 1024,
-          "resource": "memory"
-        },
-        "node_type": {
-          "master": true,
-          "data": false,
-          "ingest": false
-        },
-        "instance_configuration_id": "master",
-        "elasticsearch": { },
-        "zone_count": 3
-      }, {
-        "size": {
-          "value": 1024,
-          "resource": "memory"
-        },
-        "node_type": {
-          "master": false,
-          "data": false,
-          "ingest": true
-        },
-        "instance_configuration_id": "coordinating",
-        "elasticsearch": { },
-        "zone_count": 1
-      }, {
-        "size": {
-          "value": 16384,
-          "resource": "memory"
-        },
-        "node_type": {
-          "master": false,
-          "data": false,
-          "ingest": false,
-          "ml": true
-        },
-        "instance_configuration_id": "ml",
-        "elasticsearch": {
-
-        },
-        "zone_count": 1
-      }],
-      "elasticsearch": {
-      }
-    },
-    "settings": {
-       "dedicated_masters_threshold": 3
-    },
-    "kibana": {
-      "plan": {
-        "cluster_topology": [{
-          "instance_configuration_id": "kibana",
-          "size": {
-            "value": 1024,
-            "resource": "memory"
-          },
-          "zone_count": 1
-        }],
-        "kibana": {
-          "user_settings_yaml": ""
-        }
+        ],
+        "kibana": [
+          {
+            "ref_id": "kibana-ref-id",
+            "elasticsearch_cluster_ref_id": "es-ref-id",
+            "region": "ece-region",
+            "plan": {
+              "zone_count": 1,
+              "cluster_topology": [
+                {
+                  "instance_configuration_id": "kibana",
+                  "size": {
+                    "value": 1024,
+                    "resource": "memory"
+                  }
+                }
+              ],
+              "kibana": {}
+            }
+          }
+        ],
+        "apm": [
+          {
+            "ref_id": "apm-ref-id",
+            "elasticsearch_cluster_ref_id": "es-ref-id",
+            "region": "ece-region",
+            "plan": {
+              "cluster_topology": [
+                {
+                  "instance_configuration_id": "apm",
+                  "size": {
+                    "value": 0,
+                    "resource": "memory"
+                  },
+                  "zone_count": 1
+                }
+              ],
+              "apm": {}
+            }
+          }
+        ],
+        "enterprise_search": [
+          {
+            "ref_id": "enterprise_search-ref-id",
+            "elasticsearch_cluster_ref_id": "es-ref-id",
+            "region": "ece-region",
+            "plan": {
+              "cluster_topology": [
+                {
+                  "node_type": {
+                    "appserver": true,
+                    "connector": true,
+                    "worker": true
+                  },
+                  "instance_configuration_id": "enterprise.search",
+                  "size": {
+                    "value": 0,
+                    "resource": "memory"
+                  },
+                  "zone_count": 2
+                }
+              ],
+              "enterprise_search": {}
+            }
+          }
+        ]
       }
     }
-  },
-  "system_owned": false
 }'</pre>
 </div>
 </li>
 </ol>
 </div>
+<div class="note admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>When specifying <code class="literal">node_roles</code> in the Elasticsearch plan of the deployment template, the template must contain all resource types and all Elasticsearch tiers.
+The deployment template must contain exactly one entry for each resource type. It must have one Elasticsearch, one Kibana, one APM, and one Enterprise Search. On top of that, it must also include all supported Elasticsearch tiers in the Elasticsearch plan. The supported tiers are identified by the IDs <code class="literal">hot_content</code>, <code class="literal">warm</code>, <code class="literal">cold</code>, <code class="literal">frozen</code>, <code class="literal">master</code>, <code class="literal">coordinating</code> and <code class="literal">ml</code>.</p>
+</div>
+</div>
 <p>After you have saved your new template, you can start <a class="xref" href="ece-create-deployment.html" title="Create your deployment">creating new deployments</a> with it.</p>
+<div class="note admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>To support deployment templates that are versioned due to a constraint on architecture that is only supported by newer versions of ECE, for example ARM instances, you must add additional configuration:</p>
+<div class="ulist itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+The <code class="literal">template_category_id</code> for both template versions must be identical.
+</li>
+<li class="listitem">
+The <code class="literal">min_version</code> attribute must be set.
+</li>
+</ul>
+</div>
+<p>These attributes are set at the same level as <code class="literal">name</code> and <code class="literal">description</code>. The UI selects the template with the highest matching <code class="literal">min_version</code> that is returned by the API.</p>
+</div>
+</div>
 </div>
 <div class="navfooter">
 <span class="prev">

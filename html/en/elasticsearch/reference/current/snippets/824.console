@@ -1,9 +1,15 @@
-GET /my-index-000001/_search
+GET /_search
 {
-  "sort" : [
-    { "post_date" : {"format": "strict_date_optional_time_nanos"}}
+  "sort": [
+    {
+      "_geo_distance": {
+        "pin.location": "40,-70",
+        "order": "asc",
+        "unit": "km"
+      }
+    }
   ],
-  "query" : {
-    "term" : { "user" : "kimchy" }
+  "query": {
+    "term": { "user": "kimchy" }
   }
 }

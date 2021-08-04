@@ -1,6 +1,13 @@
-GET /my-data-stream/_eql/search
+POST /_aliases
 {
-  "query": """
-    process where process.name == "regsvr32.exe"
-  """
+  "actions": [
+    {
+      "add": {
+        "index": "test",
+        "alias": "alias2",
+        "search_routing": "1,2",
+        "index_routing": "2"
+      }
+    }
+  ]
 }

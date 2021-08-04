@@ -1,19 +1,19 @@
 GET /_search
 {
   "query": {
-    "term": { "user": "kimchy" }
-  },
-  "sort": {
-    "_script": {
-      "type": "number",
-      "script": {
-        "lang": "painless",
-        "source": "doc['field_name'].value * params.factor",
-        "params": {
-          "factor": 1.1
-        }
+    "function_score": {
+      "query": {
+        "match": { "message": "elasticsearch" }
       },
-      "order": "asc"
+      "script_score": {
+        "script": {
+          "params": {
+            "a": 5,
+            "b": 1.2
+          },
+          "source": "params.a / Math.pow(params.b, doc['my-int'].value)"
+        }
+      }
     }
   }
 }

@@ -1,4 +1,6 @@
-POST /_security/oidc/prepare
+PUT /_cluster/settings
 {
-  "realm" : "oidc1"
+  "persistent" : {
+    "xpack.security.transport.filter.allow" : "172.16.0.0/24"
+  }
 }

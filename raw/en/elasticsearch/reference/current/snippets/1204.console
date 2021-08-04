@@ -1,16 +1,10 @@
-GET /_search
+GET latency/_search
 {
+  "size": 0,
   "aggs": {
-    "JapaneseCars": {
-      "terms": {
-        "field": "make",
-        "include": [ "mazda", "honda" ]
-      }
-    },
-    "ActiveCarManufacturers": {
-      "terms": {
-        "field": "make",
-        "exclude": [ "rover", "jensen" ]
+    "load_time_boxplot": {
+      "boxplot": {
+        "field": "load_time"
       }
     }
   }

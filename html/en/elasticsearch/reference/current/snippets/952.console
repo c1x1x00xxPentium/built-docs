@@ -1,21 +1,14 @@
-GET /example_points/_search
+GET /_search
 {
   "query": {
-    "bool": {
-      "must": {
+    "has_child": {
+      "type": "child",
+      "query": {
         "match_all": {}
       },
-      "filter": {
-        "geo_shape": {
-          "location": {
-            "shape": {
-              "type": "envelope",
-              "coordinates": [ [ 13.0, 53.0 ], [ 14.0, 52.0 ] ]
-            },
-            "relation": "intersects"
-          }
-        }
-      }
+      "max_children": 10,
+      "min_children": 2,
+      "score_mode": "min"
     }
   }
 }

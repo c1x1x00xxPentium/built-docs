@@ -1,6 +1,17 @@
-GET .watcher-history*/_search?pretty
+GET bicycles,other_cycles/_search
 {
-  "query" : {
-    "match" : { "result.condition.met" : true }
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "description": "dutch"
+        }
+      },
+      "filter": {
+        "term": {
+          "cycle_type": "bicycle"
+        }
+      }
+    }
   }
 }

@@ -1,13 +1,11 @@
-PUT /my-index/
+PUT _ilm/policy/my_policy
 {
-  "mappings": {
-    "properties": {
-      "@timestamp": {
-        "format": "strict_date_optional_time||epoch_second",
-        "type": "date"
-      },
-      "message": {
-        "type": "wildcard"
+  "policy": {
+    "phases": {
+      "delete": {
+        "actions": {
+          "delete" : { }
+        }
       }
     }
   }

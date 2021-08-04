@@ -1,6 +1,11 @@
-GET .watcher-history*/_search
+PUT index
 {
-  "sort" : [
-    { "result.execution_time" : "desc" }
-  ]
+  "mappings": {
+    "properties": {
+      "foo": {
+        "type": "keyword",
+        "eager_global_ordinals": true
+      }
+    }
+  }
 }

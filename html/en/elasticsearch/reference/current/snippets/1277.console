@@ -1,13 +1,4 @@
-POST /sales/_search?size=0
+PUT /test/_settings
 {
-  "query": {
-    "constant_score": {
-      "filter": {
-        "match": { "type": "hat" }
-      }
-    }
-  },
-  "aggs": {
-    "hat_prices": { "sum": { "field": "price" } }
-  }
+  "top_metrics_max_size": 100
 }

@@ -1,9 +1,16 @@
-PUT /_security/role_mapping/oidc-finance
+POST /_security/role/example1
 {
-  "roles": [ "finance_data" ],
-  "enabled": true,
-  "rules": { "all": [
-        { "field": { "realm.name": "oidc1" } },
-        { "field": { "groups": "finance-team" } }
-  ] }
+  "indices" : [
+    {
+      "names" : [ "my-index-000001" ],
+      "privileges" : [ "read" ],
+      "query" : {
+        "template" : {
+          "source" : {
+            "term" : { "acl.username" : "{{_user.username}}" }
+          }
+        }
+      }
+    }
+  ]
 }

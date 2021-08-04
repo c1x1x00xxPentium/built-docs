@@ -1,1 +1,4 @@
-GET /_ssl/certificates
+POST /_security/role/facilitator-role
+{
+  "cluster" : ["manage_oidc", "manage_token"]
+}

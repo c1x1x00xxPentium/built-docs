@@ -1,8 +1,6 @@
-GET /my-data-stream/_eql/search
+PUT /_index_template/my-data-stream-template
 {
-  "query": """
-    sequence with maxspan=1h
-      [ process where process.name == "regsvr32.exe" ] by process.pid
-      [ file where stringContains(file.name, "scrobj.dll") ] by process.pid
-  """
+  "index_patterns": [ "my-data-stream*" ],
+  "data_stream": { },
+  "priority": 500
 }

@@ -1,10 +1,3 @@
-POST /_security/role/click_role
+POST /_security/role/cluster_two_logs
 {
-  "indices": [
-    {
-      "names": [ "events-*" ],
-      "privileges": [ "read" ],
-      "query": "{\"match\": {\"category\": \"click\"}}"
-    }
-  ]
 }

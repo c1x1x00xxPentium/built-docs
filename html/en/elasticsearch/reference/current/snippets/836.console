@@ -1,18 +1,18 @@
 GET /_search
 {
-  "sort" : [
-    {
-      "_geo_distance" : {
-          "pin.location" : [-70, 40],
-          "order" : "asc",
-          "unit" : "km",
-          "mode" : "min",
-          "distance_type" : "arc",
-          "ignore_unmapped": true
-      }
+  "query": {
+    "boosting": {
+      "positive": {
+        "term": {
+          "text": "apple"
+        }
+      },
+      "negative": {
+        "term": {
+          "text": "pie tart fruit crumble tree"
+        }
+      },
+      "negative_boost": 0.5
     }
-  ],
-  "query" : {
-    "term" : { "user" : "kimchy" }
   }
 }

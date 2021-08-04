@@ -1,6 +1,8 @@
-GET /_search
+PUT /my-index-00001/_doc/1?refresh
 {
   "query": {
-    "span_term" : { "user.id" : "kimchy" }
+    "match": {
+      "message": "bonsai tree"
+    }
   }
 }

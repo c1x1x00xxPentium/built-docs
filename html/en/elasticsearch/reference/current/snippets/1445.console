@@ -1,9 +1,12 @@
-GET my-index/_search
+PUT _ilm/policy/my_policy
 {
-  "query": {
-    "match": {
-      "http.response": "304"
+  "policy": {
+    "phases": {
+      "warm": {
+        "actions": {
+          "readonly" : { }
+        }
+      }
     }
-  },
-  "fields" : ["http.response"]
+  }
 }

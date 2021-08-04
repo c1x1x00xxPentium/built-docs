@@ -1,6 +1,6 @@
-PUT my-index-000001/_doc/1?version=2&version_type=external
+POST /my-index-000001,my-index-000002/_delete_by_query
 {
-  "user": {
-    "id": "elkbee"
+  "query": {
+    "match_all": {}
   }
 }

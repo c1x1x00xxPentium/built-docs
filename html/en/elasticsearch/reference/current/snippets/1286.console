@@ -1,13 +1,20 @@
-PUT /sales
+POST /exams/_doc?refresh
 {
-  "mappings": {
-    "properties": {
-      "tags": { "type": "keyword" },
-      "comments": {                          
-        "type": "nested",
-        "properties": {
-          "username": { "type": "keyword" },
-          "comment": { "type": "text" }
+  "grade": [1, 2, 3],
+  "weight": 2
+}
+
+POST /exams/_search
+{
+  "size": 0,
+  "aggs": {
+    "weighted_grade": {
+      "weighted_avg": {
+        "value": {
+          "field": "grade"
+        },
+        "weight": {
+          "field": "weight"
         }
       }
     }

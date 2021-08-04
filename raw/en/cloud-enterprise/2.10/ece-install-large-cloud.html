@@ -34,7 +34,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="ece-install-large-cloud"></a>Deploy a large installation<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-install-large.asciidoc">edit</a></h3>
+<h3 class="title"><a id="ece-install-large-cloud"></a>Deploy a large installation<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-install-large.asciidoc">edit</a></h3>
 </div></div></div>
 <p>This type of installation is recommended for deployments with significant overall search and indexing throughput.
 You need:</p>
@@ -59,7 +59,7 @@ You need:</p>
 <img src="images/ece-pb-9.png" alt="A large installation with nine to twelve hosts across three availability zones">
 </div>
 </div>
-<h5><a id="ece_before_you_start_3"></a>Before you start<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-install-large.asciidoc">edit</a></h5>
+<h5><a id="ece_before_you_start_3"></a>Before you start<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-install-large.asciidoc">edit</a></h5>
 <p>Note that the large-sized Elastic Cloud Enterprise installation separates the allocator and proxy roles from the director and coordinator roles (ECE management services).</p>
 <p><span class="strong strong"><strong>Check the recommended JVM Heap sizes</strong></span></p>
 <div class="informaltable">
@@ -108,7 +108,7 @@ You need:</p>
 <p>For production environments, you must define the memory settings for each role, except for the <code class="literal">proxy</code> role, as starting from ECE 2.4 the JVM proxy was replaced with a Golang-based proxy. If you don&#8217;t set any memory setting, the default values are used, which are inadequate for production environments and can lead to performance or stability issues.</p>
 </div>
 </div>
-<h5><a id="ece_installation_steps_3"></a>Installation steps<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-install-large.asciidoc">edit</a></h5>
+<h5><a id="ece_installation_steps_3"></a>Installation steps<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-install-large.asciidoc">edit</a></h5>
 <div class="olist orderedlist">
 <ol class="orderedlist">
 <li class="listitem">
@@ -155,6 +155,9 @@ bash &lt;(curl -fsSL https://download.elastic.co/cloud/elastic-cloud-enterprise.
 bash &lt;(curl -fsSL https://download.elastic.co/cloud/elastic-cloud-enterprise.sh) install --coordinator-host HOST_IP --roles-token 'MY_TOKEN' --roles "proxy" --availability-zone MY_ZONE-3 --memory-settings
 '{"runner":{"xms":"1G","xmx":"1G"}}'</pre>
 </div>
+</li>
+<li class="listitem">
+Modify the first host you installed Elastic Cloud Enterprise on to prevent it from handling or routing user requests:
 </li>
 </ol>
 </div>

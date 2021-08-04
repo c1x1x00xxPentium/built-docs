@@ -1,13 +1,13 @@
-POST api/actions/connector
+POST api/actions/action
 {
-  "connector_type_id": ".jira",
+  "actionTypeId": ".resilient",
   "config": {
-    "apiUrl": "https://hms.atlassian.net",
-    "projectKey": "HMS"
+    "apiUrl": "https://ibm-resilient.siem.estc.dev",
+    "orgId": "201"
   },
   "secrets": {
-    "email": "admin@hms.gov.co.uk",
-    "apiToken": "2REegzCVGoMJaHafJou83372"
+    "apiKeyId": "2ad2bbd3-7cd2-3096-9619-de13c5ab70ca",
+    "apiKeySecret": "Hzol67ZoeATAR-8pQxSp3q_NPTDtWU6_QNBoCSCA-ic"
   },
-  "name": "Jira"
+  "name": "IBM"
 }

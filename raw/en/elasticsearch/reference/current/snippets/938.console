@@ -1,19 +1,16 @@
-GET /my_locations/_search
+PUT /example_points
 {
-  "query": {
-    "bool": {
-      "must": {
-        "match_all": {}
-      },
-      "filter": {
-        "geo_distance": {
-          "distance": "200km",
-          "pin.location": {
-            "lat": 40,
-            "lon": -70
-          }
-        }
+  "mappings": {
+    "properties": {
+      "location": {
+        "type": "geo_point"
       }
     }
   }
+}
+
+PUT /example_points/_doc/1?refresh
+{
+  "name": "Wind & Wetter, Berlin, Germany",
+  "location": [13.400544, 52.530286]
 }

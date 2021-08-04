@@ -1,14 +1,8 @@
-POST _render/template
+PUT /index_long
 {
-  "source": {
-    "query": {
-      "term": {
-        "url.full": "{{#url}}{{host}}/{{page}}{{/url}}"
-      }
+  "mappings": {
+    "properties": {
+      "field": { "type": "long" }
     }
-  },
-  "params": {
-    "host": "http://example.com",
-    "page": "hello-world"
   }
 }

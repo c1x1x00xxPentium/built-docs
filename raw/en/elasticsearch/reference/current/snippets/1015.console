@@ -1,10 +1,12 @@
-GET /test/_search
+PUT my_sparse_index
 {
-  "query": {
-    "rank_feature": {
-      "field": "pagerank",
-      "log": {
-        "scaling_factor": 4
+  "mappings": {
+    "properties": {
+      "my_sparse_vector": {
+        "type": "sparse_vector"
+      },
+      "status" : {
+        "type" : "keyword"
       }
     }
   }

@@ -1,16 +1,8 @@
-POST _reindex
+PUT /_enrich/policy/my-policy
 {
-  "max_docs": 10,
-  "source": {
-    "index": "my-index-000001",
-    "query": {
-      "function_score" : {
-        "random_score" : {},
-        "min_score" : 0.9   
-      }
-    }
-  },
-  "dest": {
-    "index": "my-new-index-000001"
+  "match": {
+    "indices": "users",
+    "match_field": "email",
+    "enrich_fields": ["first_name", "last_name", "city", "zip", "state"]
   }
 }

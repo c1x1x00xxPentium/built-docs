@@ -1,5 +1,1 @@
-POST /_security/user/saml-service-user
-{
-  "password" : "<somePasswordHere>",
-  "roles"    : ["saml-service-role"]
-}
+GET /current_year/event/1

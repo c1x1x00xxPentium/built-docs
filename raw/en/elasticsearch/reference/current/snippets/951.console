@@ -1,16 +1,14 @@
-PUT /example_points
+PUT /my-index-000001
 {
   "mappings": {
     "properties": {
-      "location": {
-        "type": "geo_point"
+      "my-join-field": {
+        "type": "join",
+        "relations": {
+          "parent": "child"
+        }
       }
     }
   }
 }
 
-PUT /example_points/_doc/1?refresh
-{
-  "name": "Wind & Wetter, Berlin, Germany",
-  "location": [13.400544, 52.530286]
-}

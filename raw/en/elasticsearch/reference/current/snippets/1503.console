@@ -1,1 +1,1 @@
-POST _ilm/stop
+POST _transform/ecommerce-customer-transform/_start

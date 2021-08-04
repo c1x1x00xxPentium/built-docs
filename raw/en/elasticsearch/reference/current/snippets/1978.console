@@ -1,9 +1,10 @@
-POST _reindex
+POST /my-index-000001/_mtermvectors
 {
-  "source": {
-    "index": ["my-index-000001", "my-index-000002"]
-  },
-  "dest": {
-    "index": "my-new-index-000002"
+  "ids": [ "1", "2" ],
+  "parameters": {
+    "fields": [
+      "message"
+    ],
+    "term_statistics": true
   }
 }

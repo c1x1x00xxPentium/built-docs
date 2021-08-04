@@ -1,12 +1,25 @@
-GET /my-index-000001/_search
+POST child_example/_search?size=0
 {
   "aggs": {
-    "my-agg-name": {
+    "top-tags": {
       "terms": {
-        "field": "my-field"
+        "field": "tags.keyword",
+        "size": 10
       },
-      "meta": {
-        "my-metadata-field": "foo"
+      "aggs": {
+        "to-answers": {
+          "children": {
+            "type" : "answer"
+          },
+          "aggs": {
+            "top-names": {
+              "terms": {
+                "field": "owner.display_name.keyword",
+                "size": 10
+              }
+            }
+          }
+        }
       }
     }
   }

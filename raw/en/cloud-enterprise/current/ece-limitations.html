@@ -30,11 +30,11 @@
 </div>
 <div class="chapter">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ece-limitations"></a>Limitations and known problems<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ece-limitations"></a>Limitations and known problems<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h2>
 </div></div></div>
-<p>The following limitations and known problems apply to the 2.10.0 release of ECE, or to earlier releases as noted.</p>
+<p>The following limitations and known problems apply to the 2.11.0 release of ECE, or to earlier releases as noted.</p>
 <p>For troubleshooting help, you can also refer to the list of <a class="xref" href="ece-issues.html" title="Common issues">Common issues</a>.</p>
-<h3><a id="ece_installation_and_configuration"></a>Installation and configuration<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
+<h3><a id="ece_installation_and_configuration"></a>Installation and configuration<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
@@ -52,8 +52,7 @@ On RHEL and CentOS, the firewalld service is not compatible with Docker and inte
 <ul class="itemizedlist">
 <li class="listitem">
 When you use OverlayFS with Kernel-LT 4.4.156 and later, there is a known
-regression that prevents Elastic Cloud Enterprise from completing the installation. From the
-kernel-archive, use Kernel 4.4.155.
+regression that prevents Elastic Cloud Enterprise from completing the installation. This regression is fixed with Kernel-LT 4.9.
 </li>
 <li class="listitem">
 If you install ECE on AWS, you likely need to <a class="xref" href="ece-issues.html#ece-aws-private-ip" title="Cloud UI, Elasticsearch, and Kibana endpoint URLs inaccessible on AWS">modify the cluster endpoint</a>, as the public hostname resolves to a different IP address externally than it does internally on the cluster.
@@ -69,7 +68,7 @@ Due to a <a href="https://github.com/elastic/elasticsearch/issues/56739" class="
 </li>
 </ul>
 </div>
-<h3><a id="ece_security"></a>Security<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
+<h3><a id="ece_security"></a>Security<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
@@ -97,7 +96,7 @@ PEM and PKCS11 formatted certificates are not supported.
 </ul>
 </div>
 <p>Some additional limitations apply when securing your installation. To learn more, see <a class="xref" href="ece-securing-ece.html" title="Securing your installation">Secure Elastic Cloud Enterprise</a>.</p>
-<h3><a id="ece_deployments"></a>Deployments<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
+<h3><a id="ece_deployments"></a>Deployments<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
@@ -108,7 +107,7 @@ ECE has a maximum limit of 420 seconds, so we recommend optimizing long-running 
 </li>
 </ul>
 </div>
-<h3><a id="ece_upgrading"></a>Upgrading<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
+<h3><a id="ece_upgrading"></a>Upgrading<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
@@ -128,7 +127,7 @@ When upgrading to ECE version 2.7.0 the automatic upgrade of the <code class="li
 </li>
 </ul>
 </div>
-<h3><a id="ece-restrictions-transport-client"></a>Transport client<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
+<h3><a id="ece-restrictions-transport-client"></a>Transport client<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-limitations-known-problems.asciidoc">edit</a></h3>
 <p>The transport client is not considered thread safe in a cloud environment. We recommend that you use the Java REST client instead. This restriction relates to the fact that your deployments hosted on Elastic Cloud Enterprise are behind proxies, which prevent the transport client from communicating directly with Elasticsearch clusters.</p>
 </div>
 <div class="navfooter">

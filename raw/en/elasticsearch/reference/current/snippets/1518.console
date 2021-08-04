@@ -1,8 +1,5 @@
-GET _cluster/settings
-
-PUT _cluster/settings
+PUT /_snapshot/my_backup/snapshot_1
 {
-  "persistent": {
-    "xpack.monitoring.collection.enabled": true
-  }
+  "indices": ".security",
+  "include_global_state": true
 }

@@ -1,1 +1,1 @@
-GET /_autoscaling/capacity/
+GET /_cat/indices/my-index-*?v=true&s=index

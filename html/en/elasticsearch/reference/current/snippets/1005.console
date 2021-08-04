@@ -1,8 +1,18 @@
-PUT /my-index-00001/_doc/4?refresh
+GET /_search
 {
   "query": {
-    "match": {
-      "message": "lazy dog"
+    "bool": {
+      "filter": {
+        "script": {
+          "script": """
+            double amount = doc['amount'].value;
+            if (doc['type'].value == 'expense') {
+              amount *= -1;
+            }
+            return amount < 10;
+          """
+        }
+      }
     }
   }
 }

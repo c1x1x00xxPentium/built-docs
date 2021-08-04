@@ -1,1 +1,10 @@
-PUT _security/user/logstash_system/_enable
+POST /_security/role/click_role
+{
+  "indices": [
+    {
+      "names": [ "events-*" ],
+      "privileges": [ "read" ],
+      "query": "{\"match\": {\"category\": \"click\"}}"
+    }
+  ]
+}

@@ -1,7 +1,4 @@
-GET /my-data-stream/_eql/search
+POST /_sql?format=txt
 {
-  "tiebreaker_field": "event.sequence",
-  "query": """
-    process where process.name == "cmd.exe" and stringContains(process.executable, "System32")
-  """
+  "query": "SELECT * FROM library WHERE release_date < '2000-01-01'"
 }

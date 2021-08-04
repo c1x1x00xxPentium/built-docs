@@ -1,13 +1,10 @@
-POST _render/template
+POST /index_long,index_double/_search
 {
-  "source": {
-    "query": {
-      "match": {
-        "user.group.emails": "{{#join}}emails{{/join}}"
+   "sort" : [
+      {
+        "field" : {
+            "numeric_type" : "double"
+        }
       }
-    }
-  },
-  "params": {
-    "emails": [ "user1@example.com", "user_one@example.com" ]
-  }
+   ]
 }

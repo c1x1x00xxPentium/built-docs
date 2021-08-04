@@ -1,3 +1,2 @@
-GET my-index/_settings?flat_settings=true&include_defaults=true
-
-GET _cluster/settings?flat_settings=true&include_defaults=true
+# PUT /<my-index-{now/d}>
+PUT /%3Cmy-index-%7Bnow%2Fd%7D%3E

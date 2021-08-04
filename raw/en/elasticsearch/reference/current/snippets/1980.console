@@ -1,5 +1,4 @@
-POST my-index-000001/_doc/1?refresh
-{
-  "text": "words words",
-  "flag": "foo"
-}
+PUT /test/_doc/1?refresh
+{"test": "test"}
+PUT /test/_doc/2?refresh=true
+{"test": "test"}

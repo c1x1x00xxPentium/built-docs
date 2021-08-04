@@ -1,19 +1,30 @@
-GET /my_test_scores/_search
+PUT my-index-000001/_doc/1?refresh
+{
+  "text": "quick brown fox",
+  "popularity": 1
+}
+
+PUT my-index-000001/_doc/2?refresh
+{
+  "text": "quick fox",
+  "popularity": 5
+}
+
+GET my-index-000001/_search
 {
   "query": {
-    "term": {
-      "grad_year": "2099"
-    }
-  },
-  "sort": [
-    {
-      "_script": {
-        "type": "number",
+    "function_score": {
+      "query": {
+        "match": {
+          "text": "quick brown fox"
+        }
+      },
+      "script_score": {
         "script": {
-          "source": "doc['math_score'].value + doc['verbal_score'].value"
-        },
-        "order": "desc"
+          "lang": "expression",
+          "source": "_score * doc['popularity']"
+        }
       }
     }
-  ]
+  }
 }

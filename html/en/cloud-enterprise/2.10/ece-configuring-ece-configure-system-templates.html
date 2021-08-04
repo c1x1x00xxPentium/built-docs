@@ -128,13 +128,13 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ece-configuring-ece-configure-system-templates"></a>Configure system deployment templates<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ece-configuring-ece-configure-system-templates"></a>Configure system deployment templates<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h2>
 </div></div></div>
 <p>While you can create new deployment templates for some use cases, if the system templates generally suit your needs but just require minor changes, you may choose to configure or modify the system templates.</p>
 <p>For example, you want to use autoscaling with the system templates (as <a class="xref" href="ece-autoscaling.html#ece-autoscaling-restrictions" title="Restrictions and limitations">autoscaling is not available on custom deployment templates</a>), but want to modify some of the default values for autoscaling in those templates.
 You might want to enable autoscaling by default for new deployments, or adjust the default value of the autoscaling maximum for the hot tier.</p>
 <p>Note that you cannot edit system templates through the UI; they may only be configured through the API.</p>
-<h3><a id="ece_configure_system_deployment_templates_through_the_restful_api"></a>Configure system deployment templates through the RESTful API<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
+<h3><a id="ece_configure_system_deployment_templates_through_the_restful_api"></a>Configure system deployment templates through the RESTful API<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-ece-deployment-templates.asciidoc">edit</a></h3>
 <div class="note admon">
 <div class="icon"></div>
 <div class="admon_content">
@@ -146,7 +146,7 @@ You might want to enable autoscaling by default for new deployments, or adjust t
 <li class="listitem">
 <p>Obtain the existing system deployment template you wish to modify. Note the <code class="literal">id</code> of the system deployment template as you will include this value in the API call to edit the template.</p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">curl -k -X GET -H "Authorization: ApiKey $ECE_API_KEY" https://COORDINATOR_HOST:12443/api/v1/platform/configuration/templates/deployments</pre>
+<pre class="programlisting prettyprint lang-sh">curl -k -X GET -H "Authorization: ApiKey $ECE_API_KEY" https://COORDINATOR_HOST:12443/api/v1/deployments/templates?region=ece-region</pre>
 </div>
 </li>
 <li class="listitem">
@@ -157,7 +157,7 @@ Edit the JSON of the system deployment template you wish to modify.
 <p>The following example modifies the Default system deployment template (that, is the system template with <code class="literal">id</code> value of <code class="literal">default</code>),
 setting the default value of <code class="literal">autoscaling_enabled</code> to <code class="literal">true</code> and the default autoscaling maximum size of the hot tier to 4,194,304MB (64GB * 64 nodes).</p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">curl -k -X PUT -H "Authorization: ApiKey $ECE_API_KEY" https://$COORDINATOR_HOST:12443//api/v1/deployments/templates/default?region=ece-region -H 'content-type: application/json' -d '{
+<pre class="programlisting prettyprint lang-sh">curl -k -X PUT -H "Authorization: ApiKey $ECE_API_KEY" https://$COORDINATOR_HOST:12443/api/v1/deployments/templates/default?region=ece-region -H 'content-type: application/json' -d '{
   {
   "name" : "Default",
   "description" : "Default deployment template for clusters",

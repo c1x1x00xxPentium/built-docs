@@ -126,7 +126,7 @@
 </div>
 <div class="chapter">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ece-configuring-deployment-aliases"></a>Enable custom endpoint aliases<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-configuring-deployment-aliases.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ece-configuring-deployment-aliases"></a>Enable custom endpoint aliases<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-configuring-deployment-aliases.asciidoc">edit</a></h2>
 </div></div></div>
 <p>Custom endpoint aliases allow users to replace the UUID for each application with a human readable string. Platform administrators must enable this feature to allow deployment managers to create and modify aliases for their deployments.</p>
 <div class="note admon">
@@ -163,6 +163,9 @@ For APM, the certificate needs to allow for <span class="strong strong"><strong>
 </li>
 <li class="listitem">
 For Enterprise Search or AppSearch, the certificate needs to allow for <span class="strong strong"><strong>*.ent.&lt;your-domain&gt;</strong></span>
+</li>
+<li class="listitem">
+For Fleet, the certificate needs to allow for <span class="strong strong"><strong>*.fleet.&lt;your-domain&gt;</strong></span>
 </li>
 </ul>
 </div>

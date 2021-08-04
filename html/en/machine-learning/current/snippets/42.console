@@ -1,46 +1,59 @@
-PUT _ml/anomaly_detectors/weblogs-vectors
+PUT .ml-annotations-6/_mapping
 {
-  "analysis_config" : {
-    "bucket_span":"15m",
-    "detectors": [
-      {
-        "detector_description": "Sum of bytes",
-        "function": "sum",
-        "field_name": "bytes",
-        "partition_field_name": "geo.dest"
-      }
-    ],
-    "influencers": [
-    "geo.src",
-    "agent.keyword",
-    "geo.dest"
-    ]
-  },
-  "data_description" : {
-    "time_field": "timestamp"
+  "properties": {
+    "event" : {
+      "type" : "keyword"
+    },
+    "detector_index" : {
+      "type" : "integer"
+    },
+    "partition_field_name" : {
+      "type" : "keyword"
+    },
+    "partition_field_value" : {
+      "type" : "keyword"
+    },
+    "over_field_name" : {
+      "type" : "keyword"
+    },
+    "over_field_value" : {
+      "type" : "keyword"
+    },
+    "by_field_name" : {
+      "type" : "keyword"
+    },
+    "by_field_value" : {
+      "type" : "keyword"
+    }
   }
 }
 
-PUT _ml/datafeeds/datafeed-weblogs-vectors
+PUT .ml-config/_mapping
 {
-    "job_id": "weblogs-vectors",
-    "query": {
-      "bool": {
-        "must": [
-          {
-            "match_all": {}
+  "properties": {
+    "analysis_config": {
+      "properties": {
+        "per_partition_categorization" : {
+          "properties" : {
+            "enabled" : {
+              "type" : "boolean"
+            },
+            "stop_on_warn" : {
+              "type" : "boolean"
+            }
           }
-        ]
+        }
       }
     },
-    "indices": [
-      "kibana_sample_data_logs"
-    ]
-}
-
-POST _ml/anomaly_detectors/weblogs-vectors/_open
-
-POST _ml/datafeeds/datafeed-weblogs-vectors/_start
-{
-  "end": "2021-07-15T22:00:00Z"
+    "max_num_threads" : {
+      "type" : "integer"
+    },
+    "model_plot_config" : {
+      "properties" : {
+        "annotations_enabled" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  }
 }

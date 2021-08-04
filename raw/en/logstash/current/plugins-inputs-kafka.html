@@ -2,19 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Kafka input plugin | Logstash Reference [7.14] | Elastic</title>
-<link rel="home" href="index.html" title="Logstash Reference [7.14]"/>
+<title>Kafka input plugin | Logstash Reference [7.13] | Elastic</title>
+<link rel="home" href="index.html" title="Logstash Reference [7.13]"/>
 <link rel="up" href="input-plugins.html" title="Input plugins"/>
 <link rel="prev" href="plugins-inputs-jmx.html" title="Jmx input plugin"/>
 <link rel="next" href="plugins-inputs-kinesis.html" title="Kinesis input plugin"/>
-<meta name="DC.type" content="Learn/Docs/Logstash/Reference/7.14"/>
+<meta name="DC.type" content="Learn/Docs/Logstash/Reference/7.13"/>
 <meta name="DC.subject" content="Logstash"/>
-<meta name="DC.identifier" content="7.14"/>
+<meta name="DC.identifier" content="7.13"/>
 </head>
 <body>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Logstash Reference [7.14]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Logstash Reference [7.13]</a></span>
 »
 <span class="breadcrumb-link"><a href="input-plugins.html">Input plugins</a></span>
 »
@@ -39,13 +39,13 @@
 A component of the <a class="xref" href="plugins-integrations-kafka.html" title="Kafka Integration Plugin">kafka integration plugin</a>
 </li>
 <li class="listitem">
-Integration version: v10.8.1
+Integration version: v10.7.6
 </li>
 <li class="listitem">
-Released on: 2021-07-13
+Released on: 2021-05-31
 </li>
 <li class="listitem">
-<a href="https://github.com/logstash-plugins/logstash-integration-kafka/blob/v10.8.1/CHANGELOG.md" class="ulink" target="_top">Changelog</a>
+<a href="https://github.com/logstash-plugins/logstash-integration-kafka/blob/v10.7.6/CHANGELOG.md" class="ulink" target="_top">Changelog</a>
 </li>
 </ul>
 </div>
@@ -53,7 +53,7 @@ Released on: 2021-07-13
 <a href="/guide/en/logstash-versioned-plugins/current/input-kafka-index.html" class="ulink" target="_top">Versioned plugin docs</a>.</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_getting_help_31"></a>Getting Help<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_getting_help_30"></a>Getting Help<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h3>
 </div></div></div>
 <p>For questions about the plugin, open a topic in the <a href="http://discuss.elastic.co" class="ulink" target="_top">Discuss</a> forums.
 For bugs or feature requests, open an issue in <a href="https://github.com/logstash-plugins/logstash-integration-kafka" class="ulink" target="_top">Github</a>.
@@ -62,7 +62,7 @@ For the list of Elastic supported plugins, please consult the <a href="/support/
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_description_30"></a>Description<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_description_29"></a>Description<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h3>
 </div></div></div>
 <p>This input will read events from a Kafka topic.</p>
 <p>This plugin uses Kafka Client 2.5. For broker compatibility, see the
@@ -348,11 +348,6 @@ See the <a href="https://kafka.apache.org/25/documentation" class="ulink" target
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-schema_registry_url" title="schema_registry_url"><code class="literal">schema_registry_url</code></a></p></td>
 <td align="left" valign="top"><p><a class="xref" href="configuration-file-structure.html#uri" title="URI">uri</a></p></td>
-<td align="left" valign="top"><p>No</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-schema_registry_validation" title="schema_registry_validation"><code class="literal">schema_registry_validation</code></a></p></td>
-<td align="left" valign="top"><p><a class="xref" href="configuration-file-structure.html#string" title="String">string</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 <tr>
@@ -946,7 +941,8 @@ Default value is <code class="literal">300000</code> milliseconds (5 minutes).
 <p>The maximum delay between invocations of poll() when using consumer group management. This places
 an upper bound on the amount of time that the consumer can be idle before fetching more records.
 If poll() is not called before expiration of this timeout, then the consumer is considered failed and
-the group will rebalance in order to reassign the partitions to another member.</p>
+the group will rebalance in order to reassign the partitions to another member.
+The value of the configuration <code class="literal">request_timeout_ms</code> must always be larger than <code class="literal">max_poll_interval_ms</code>. ???</p>
 </div>
 
 <div class="section">
@@ -1251,31 +1247,6 @@ The schemas must follow a naming convention with the pattern &lt;topic name&gt;-
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="plugins-inputs-kafka-schema_registry_validation"></a><code class="literal">schema_registry_validation</code><a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h4>
-</div></div></div>
-<div class="ulist itemizedlist">
-<ul class="itemizedlist">
-<li class="listitem">
-Value can be either of: <code class="literal">auto</code>, <code class="literal">skip</code>
-</li>
-<li class="listitem">
-Default value is <code class="literal">"auto"</code>
-</li>
-</ul>
-</div>
-<div class="note admon">
-<div class="icon"></div>
-<div class="admon_content">
-<p>Under most circumstances, the default setting of <code class="literal">auto</code> should not need to be changed.</p>
-</div>
-</div>
-<p>When using the schema registry, by default the plugin checks connectivity and validates the schema registry, during plugin registration, before events are processed.
-In some circumstances, this process may fail when it tries to validate an authenticated schema registry, causing the plugin to crash.
-This setting allows the plugin to skip validation during registration, which allows the plugin to continue and events to be processed. Note that an incorrectly configured schema registry will still stop the plugin from processing events.</p>
-</div>
-
-<div class="section">
-<div class="titlepage"><div><div>
 <h4 class="title"><a id="plugins-inputs-kafka-security_protocol"></a><code class="literal">security_protocol</code><a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="ulist itemizedlist">
@@ -1541,32 +1512,32 @@ Use either the value_deserializer_class config option or the
 <tbody>
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-add_field" title="add_field"><code class="literal">add_field</code></a></p></td>
-<td align="left" valign="top"><p><a href="/guide/en/logstash/7.14/configuration-file-structure.html#hash" class="ulink" target="_top">hash</a></p></td>
+<td align="left" valign="top"><p><a href="/guide/en/logstash/7.13/configuration-file-structure.html#hash" class="ulink" target="_top">hash</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-codec" title="codec"><code class="literal">codec</code></a></p></td>
-<td align="left" valign="top"><p><a href="/guide/en/logstash/7.14/configuration-file-structure.html#codec" class="ulink" target="_top">codec</a></p></td>
+<td align="left" valign="top"><p><a href="/guide/en/logstash/7.13/configuration-file-structure.html#codec" class="ulink" target="_top">codec</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-enable_metric" title="enable_metric"><code class="literal">enable_metric</code></a></p></td>
-<td align="left" valign="top"><p><a href="/guide/en/logstash/7.14/configuration-file-structure.html#boolean" class="ulink" target="_top">boolean</a></p></td>
+<td align="left" valign="top"><p><a href="/guide/en/logstash/7.13/configuration-file-structure.html#boolean" class="ulink" target="_top">boolean</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-id" title="id"><code class="literal">id</code></a></p></td>
-<td align="left" valign="top"><p><a href="/guide/en/logstash/7.14/configuration-file-structure.html#string" class="ulink" target="_top">string</a></p></td>
+<td align="left" valign="top"><p><a href="/guide/en/logstash/7.13/configuration-file-structure.html#string" class="ulink" target="_top">string</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-tags" title="tags"><code class="literal">tags</code></a></p></td>
-<td align="left" valign="top"><p><a href="/guide/en/logstash/7.14/configuration-file-structure.html#array" class="ulink" target="_top">array</a></p></td>
+<td align="left" valign="top"><p><a href="/guide/en/logstash/7.13/configuration-file-structure.html#array" class="ulink" target="_top">array</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p><a class="xref" href="plugins-inputs-kafka.html#plugins-inputs-kafka-type" title="type"><code class="literal">type</code></a></p></td>
-<td align="left" valign="top"><p><a href="/guide/en/logstash/7.14/configuration-file-structure.html#string" class="ulink" target="_top">string</a></p></td>
+<td align="left" valign="top"><p><a href="/guide/en/logstash/7.13/configuration-file-structure.html#string" class="ulink" target="_top">string</a></p></td>
 <td align="left" valign="top"><p>No</p></td>
 </tr>
 </tbody>
@@ -1576,7 +1547,7 @@ Use either the value_deserializer_class config option or the
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_details_27"></a>Details<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_details_26"></a>Details<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/logstash-plugins/logstash-integration-kafka/edit/master/docs/input-kafka.asciidoc">edit</a></h3>
 </div></div></div>
 <p>&nbsp;</p>
 <div class="section">
@@ -1586,7 +1557,7 @@ Use either the value_deserializer_class config option or the
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Value type is <a href="/guide/en/logstash/7.14/configuration-file-structure.html#hash" class="ulink" target="_top">hash</a>
+Value type is <a href="/guide/en/logstash/7.13/configuration-file-structure.html#hash" class="ulink" target="_top">hash</a>
 </li>
 <li class="listitem">
 Default value is <code class="literal">{}</code>
@@ -1603,7 +1574,7 @@ Default value is <code class="literal">{}</code>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Value type is <a href="/guide/en/logstash/7.14/configuration-file-structure.html#codec" class="ulink" target="_top">codec</a>
+Value type is <a href="/guide/en/logstash/7.13/configuration-file-structure.html#codec" class="ulink" target="_top">codec</a>
 </li>
 <li class="listitem">
 Default value is <code class="literal">"plain"</code>
@@ -1620,7 +1591,7 @@ Default value is <code class="literal">"plain"</code>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Value type is <a href="/guide/en/logstash/7.14/configuration-file-structure.html#boolean" class="ulink" target="_top">boolean</a>
+Value type is <a href="/guide/en/logstash/7.13/configuration-file-structure.html#boolean" class="ulink" target="_top">boolean</a>
 </li>
 <li class="listitem">
 Default value is <code class="literal">true</code>
@@ -1639,7 +1610,7 @@ for a specific plugin.</p>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Value type is <a href="/guide/en/logstash/7.14/configuration-file-structure.html#string" class="ulink" target="_top">string</a>
+Value type is <a href="/guide/en/logstash/7.13/configuration-file-structure.html#string" class="ulink" target="_top">string</a>
 </li>
 <li class="listitem">
 There is no default value for this setting.
@@ -1673,7 +1644,7 @@ Adding a named ID in this case will help in monitoring Logstash when using the m
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Value type is <a href="/guide/en/logstash/7.14/configuration-file-structure.html#array" class="ulink" target="_top">array</a>
+Value type is <a href="/guide/en/logstash/7.13/configuration-file-structure.html#array" class="ulink" target="_top">array</a>
 </li>
 <li class="listitem">
 There is no default value for this setting.
@@ -1691,7 +1662,7 @@ There is no default value for this setting.
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Value type is <a href="/guide/en/logstash/7.14/configuration-file-structure.html#string" class="ulink" target="_top">string</a>
+Value type is <a href="/guide/en/logstash/7.13/configuration-file-structure.html#string" class="ulink" target="_top">string</a>
 </li>
 <li class="listitem">
 There is no default value for this setting.

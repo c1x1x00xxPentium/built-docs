@@ -1,16 +1,8 @@
-GET /my_locations/_search
+PUT /test/_doc/1
 {
-  "query": {
-    "bool": {
-      "must": {
-        "match_all": {}
-      },
-      "filter": {
-        "geo_distance": {
-          "distance": "12km",
-          "pin.location": [ -70, 40 ]
-        }
-      }
+  "location":
+    {
+      "coordinates": [[46.25,20.14],[47.49,19.04]],
+      "type": "multipoint"
     }
-  }
 }

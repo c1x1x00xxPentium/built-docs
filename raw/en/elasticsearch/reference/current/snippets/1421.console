@@ -1,10 +1,22 @@
-POST my-index-000001/_update/1
+GET my-index/_search
 {
-  "script": {
-    "source": "if (ctx._source.tags.contains(params['tag'])) { ctx.op = 'delete' } else { ctx.op = 'none' }",
-    "lang": "painless",
-    "params": {
-      "tag": "green"
+  "runtime_mappings": {
+    "gc_size": {
+      "type": "keyword",
+      "script": """
+        Map gc=dissect('[%{@timestamp}][%{code}][%{desc}]  %{ident} used %{usize}, capacity %{csize}, committed %{comsize}, reserved %{rsize}').extract(doc["gc.keyword"].value);
+        if (gc != null) emit("used" + ' ' + gc.usize + ', ' + "capacity" + ' ' + gc.csize + ', ' + "committed" + ' ' + gc.comsize);
+      """
     }
-  }
+  },
+  "size": 1,
+  "aggs": {
+    "sizes": {
+      "terms": {
+        "field": "gc_size",
+        "size": 10
+      }
+    }
+  },
+  "fields" : ["gc_size"]
 }

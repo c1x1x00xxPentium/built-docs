@@ -1,11 +1,31 @@
-PUT _ingest/pipeline/my_test_scores_pipeline
+PUT my-index-000001
 {
-  "description": "Calculates the total test score",
-  "processors": [
-    {
-      "script": {
-        "source": "ctx.total_score = (ctx.math_score + ctx.verbal_score)"
+  "mappings": {
+    "properties": {
+      "first_name": {
+        "type": "text"
+      },
+      "last_name": {
+        "type": "text"
       }
     }
-  ]
+  }
+}
+
+PUT my-index-000001/_doc/1?refresh
+{
+  "first_name": "Barry",
+  "last_name": "White"
+}
+
+GET my-index-000001/_search
+{
+  "script_fields": {
+    "full_name": {
+      "script": {
+        "lang": "painless",
+        "source": "params._source.first_name + ' ' + params._source.last_name"
+      }
+    }
+  }
 }

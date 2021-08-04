@@ -1,26 +1,20 @@
-POST /_search
+PUT /_ilm/policy/rollover_policy
 {
-  "query": {
-    "function_score": {
-      "query": {
-        "match": {
-          "body": "foo"
-        }
-      },
-      "functions": [
-        {
-          "script_score": {
-            "script": {
-                "source": "pure_df",
-                "lang" : "expert_scripts",
-                "params": {
-                    "field": "body",
-                    "term": "foo"
-                }
-            }
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_size": "50G"
           }
         }
-      ]
+      },
+      "delete": {
+        "min_age": "1d",
+        "actions": {
+          "delete": {}
+        }
+      }
     }
   }
 }

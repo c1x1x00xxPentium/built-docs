@@ -1,1 +1,1 @@
-POST /<follower_index>/_ccr/unfollow
+POST /_data_stream/_promote/my-data-stream

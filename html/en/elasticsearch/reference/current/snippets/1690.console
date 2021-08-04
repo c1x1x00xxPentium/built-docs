@@ -1,17 +1,12 @@
-PUT index
+PUT _settings
 {
-  "mappings": {
-    "properties": {
-      "price_range": {
-        "type": "keyword"
-      }
-    }
-  }
+  "index.max_result_window": 5000
 }
 
-PUT index/_doc/1
+PUT _cluster/settings
 {
-  "designation": "spoon",
-  "price": 13,
-  "price_range": "10-100"
+  "persistent": {
+    "search.max_buckets": 20000,
+    "search.allow_expensive_queries": false
+  }
 }

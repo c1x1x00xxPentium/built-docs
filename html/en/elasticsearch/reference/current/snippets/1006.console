@@ -1,16 +1,25 @@
-GET /my-index-00001/_search
+GET /_search
 {
+  "runtime_mappings": {
+    "amount.signed": {
+      "type": "double",
+      "script": """
+        double amount = doc['amount'].value;
+        if (doc['type'].value == 'expense') {
+          amount *= -1;
+        }
+        emit(amount);
+      """
+    }
+  },
   "query": {
-    "percolate": {
-      "field": "query",
-      "document": {
-        "message": "The quick brown fox jumps over the lazy dog"
+    "bool": {
+      "filter": {
+        "range": {
+          "amount.signed": { "lt": 10 }
+        }
       }
     }
   },
-  "highlight": {
-    "fields": {
-      "message": {}
-    }
-  }
+  "fields": [{"field": "amount.signed"}]
 }

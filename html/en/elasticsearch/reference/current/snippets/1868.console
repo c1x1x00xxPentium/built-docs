@@ -1,1 +1,1 @@
-DELETE /_ccr/auto_follow/my_auto_follow_pattern
+GET my-index-000001/_doc/0?_source_includes=*.id&_source_excludes=entities

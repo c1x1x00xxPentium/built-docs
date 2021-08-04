@@ -34,12 +34,12 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="RunnersSummary"></a><code class="literal">RunnersSummary</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
+<h3 class="title"><a id="RunnersSummary"></a><code class="literal">RunnersSummary</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
 </div></div></div>
 <p>Summarized information about the runners.</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_properties_371"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_properties_386"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="variablelist">
 <dl class="variablelist">
@@ -77,6 +77,14 @@ Whether all runners are healthy
 </dd>
 <dt>
 <span class="term">
+<code class="literal">healthy_runners</code> (<code class="literal">integer</code> as <code class="literal">int32</code>, required)
+</span>
+</dt>
+<dd>
+Number of healthy runners
+</dd>
+<dt>
+<span class="term">
 <code class="literal">max_available_capacity</code> (<code class="literal">integer</code> as <code class="literal">int32</code>, required)
 </span>
 </dt>
@@ -97,7 +105,7 @@ Total number of runners
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_example_378"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-57/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_example_393"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="pre_wrapper lang-json">
 <pre class="programlisting prettyprint lang-json">{
@@ -105,6 +113,7 @@ Total number of runners
    "connected_runners" : 0,
    "containers_count" : 0,
    "healthy" : true,
+   "healthy_runners" : 0,
    "max_available_capacity" : 0,
    "total_runners" : 0
 }</pre>
