@@ -130,12 +130,12 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="TlsPublicCertChain"></a><code class="literal">TlsPublicCertChain</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
+<h3 class="title"><a id="TlsPublicCertChain"></a><code class="literal">TlsPublicCertChain</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
 </div></div></div>
 <p>The public portion of the certificate chain that contains the PEM encoded server certificate, intermediate certificates, and the CA certificate. NOTE: The private key, normally included in certificate chains, is omitted.</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_properties_422"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_properties_426"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="variablelist">
 <dl class="variablelist">
@@ -146,6 +146,14 @@
 </dt>
 <dd>
 The list of PEM encoded X509 certificates that make up the certificate chain
+</dd>
+<dt>
+<span class="term">
+<code class="literal">chain_status</code> (<a class="xref" href="ChainStatus.html" title="ChainStatus"><code class="literal">ChainStatus</code></a>)
+</span>
+</dt>
+<dd>
+Details on the validity and lifetime of the certification chain
 </dd>
 <dt>
 <span class="term">
@@ -161,13 +169,17 @@ Was this certificate chain user supplied or automatically generated?
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_example_429"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_example_435"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="pre_wrapper lang-json">
 <pre class="programlisting prettyprint lang-json">{
    "chain" : [
       "string"
    ],
+   "chain_status" : {
+      "expiration_date" : "2019-01-01T00:00:00Z",
+      "first_certificate_to_expire" : "string"
+   },
    "user_supplied" : true
 }</pre>
 </div>

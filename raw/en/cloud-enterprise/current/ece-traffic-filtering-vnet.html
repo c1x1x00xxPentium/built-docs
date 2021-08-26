@@ -6,7 +6,7 @@
 <link rel="home" href="index.html" title="Elastic Cloud Enterprise Reference [2.11]"/>
 <link rel="up" href="ece-traffic-filtering-deployment-configuration.html" title="Traffic Filtering"/>
 <link rel="prev" href="ece-traffic-filtering-vpc.html" title="AWS Privatelink traffic filters"/>
-<link rel="next" href="ece-manage-kibana.html" title="Manage your Kibana instance"/>
+<link rel="next" href="ece-traffic-filtering-psc.html" title="GCP Private Service Connect traffic filters"/>
 <meta name="DC.type" content="Learn/Docs/CloudEnterprise/Reference/2.11"/>
 <meta name="DC.subject" content="ECE"/>
 <meta name="DC.identifier" content="2.11"/>
@@ -27,12 +27,12 @@
 <a href="ece-traffic-filtering-vpc.html">« AWS Privatelink traffic filters</a>
 </span>
 <span class="next">
-<a href="ece-manage-kibana.html">Manage your Kibana instance »</a>
+<a href="ece-traffic-filtering-psc.html">GCP Private Service Connect traffic filters »</a>
 </span>
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ece-traffic-filtering-vnet"></a>Azure Private Link traffic filters<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ece-traffic-filtering-vnet"></a>Azure Private Link traffic filters<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h2>
 </div></div></div>
 <p>Traffic filtering, to allow only Azure Private Link connections, is one of the security layers available in Elastic Cloud Enterprise. It allows you to limit how your deployments can be accessed.</p>
 <p>Read more about <a class="xref" href="ece-traffic-filtering-deployment-configuration.html" title="Traffic Filtering">Traffic Filtering</a> for the general concepts behind traffic filtering in Elastic Cloud Enterprise.</p>
@@ -81,12 +81,18 @@
 </tbody>
 </table>
 </div>
-<h3><a id="ece-private-link-azure-dns"></a>Create your private endpoint and DNS entries in Azure<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h3>
+<h3><a id="ece-private-link-azure-dns"></a>Create your private endpoint and DNS entries in Azure<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h3>
 <div class="olist orderedlist">
 <ol class="orderedlist">
 <li class="listitem">
 <p>Create a private endpoint in your VNet using the alias for your region.</p>
 <p>Follow the <a href="https://docs.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal#create-a-private-endpoint" class="ulink" target="_top">Azure instructions</a> for details on creating a private endpoint to an endpoint service.</p>
+<div class="note admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>You will notice that the Private Link endpoint is in the <code class="literal">Awaiting Approval</code> state. We validate and approve the endpoints when you create the ruleset using the Private Link <code class="literal">resource name</code> and <code class="literal">resource ID</code>, as described in the next section <a class="xref" href="ece-traffic-filtering-vnet.html#ece-azure-allow-traffic-from-link-id" title="Add the private link rules to your deployments">Add the private link rules to your deployments</a>.</p>
+</div>
+</div>
 </li>
 <li class="listitem">
 <p>Create a DNS record.</p>
@@ -111,54 +117,9 @@ After creating the <em>Private DNS Zone</em>, associate the zone with your VNet.
 </ol>
 </div>
 </li>
-<li class="listitem">
-<p>Test the connection.</p>
-<p>Find out the Elasticsearch ID of your deployment. You can do that by clicking <span class="strong strong"><strong>Copy endpoint</strong></span> link in the Cloud UI and getting the first alphanumeric part of the endpoint. For example, if your Elasticsearch endpoint is <code class="literal">https://6b111580caaa4a9e84b18ec7c600155e.eastus2.azure.elastic-cloud.com</code> then your Elasticsearch ID is <code class="literal">6b111580caaa4a9e84b18ec7c600155e</code>.</p>
-<div class="tip admon">
-<div class="icon"></div>
-<div class="admon_content">
-<p>The endpoint ID is <span class="strong strong"><strong>different</strong></span> from the deployment ID featured prominently in the console.</p>
-</div>
-</div>
-<p>To access your Elasticsearch cluster over Private Link, use the following URL structure:</p>
-<p><code class="literal">https://{elasticsearch_ID}.{private_hosted_zone_domain_name}:9243</code></p>
-<p>For example:</p>
-<p><code class="literal">https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com</code></p>
-<p>You can test the Azure portal part of the setup with the following command (substitute the region and Elasticsearch ID with your cluster):</p>
-<div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">$ curl -v https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243
-* Rebuilt URL to: https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243/
-*   Trying 192.168.46.5...         # &lt;== note this IP address
-* connect to 192.168.46.5 port 9243 failed: No route to host
-* Failed to connect to 6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com port 9243: No route to host
-* Closing connection 0
-curl: (7) Failed to connect to 6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com port 9243: No route to host</pre>
-</div>
-<p>Check the IP address <code class="literal">192.168.46.5</code> it should be the same as the IP address of your private endpoint.</p>
-<div class="note admon">
-<div class="icon"></div>
-<div class="admon_content">
-<p>The connection fails until you create an Azure Private Link traffic filter rule set in the Elastic Cloud console.</p>
-</div>
-</div>
-<p>When the rule set is created the output looks like this:</p>
-<div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">$ curl -v https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243
-* Rebuilt URL to: https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243/
-*   Trying 192.168.46.5...
-..
-* SSL connection using TLS1.2 / ECDHE_RSA_AES_256_GCM_SHA384
-* 	 server certificate verification OK
-* 	 common name: *.privatelink.elastic-cloud.com (matched)
-..
-&lt; HTTP/1.1 403 Forbidden
-{"ok":false,"message":"Forbidden"}</pre>
-</div>
-<p>The connection is established, and a valid certificate is presented to the client. The <code class="literal">403 Forbidden</code> is expected, you haven&#8217;t associate the rule set with any deployment yet.</p>
-</li>
 </ol>
 </div>
-<h3><a id="ece-azure-allow-traffic-from-link-id"></a>Add the private link rules to your deployments<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h3>
+<h3><a id="ece-azure-allow-traffic-from-link-id"></a>Add the private link rules to your deployments<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h3>
 <p>Follow these high-level steps to add private link rules to your deployments.</p>
 <div class="olist orderedlist">
 <ol class="orderedlist">
@@ -179,7 +140,7 @@ curl: (7) Failed to connect to 6b111580caaa4a9e84b18ec7c600155e.privatelink.east
 </li>
 </ol>
 </div>
-<h4><a id="ece-find-your-resource-name"></a>Find your private endpoint resource name<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-find-your-resource-name"></a>Find your private endpoint resource name<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <div class="olist orderedlist">
 <ol class="orderedlist">
 <li class="listitem">
@@ -193,7 +154,7 @@ Copy the value of the top level <span class="strong strong"><strong>name</strong
 </li>
 </ol>
 </div>
-<h4><a id="ece-find-your-resource-id"></a>Find your private endpoint resource ID<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-find-your-resource-id"></a>Find your private endpoint resource ID<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <div class="olist orderedlist">
 <ol class="orderedlist">
 <li class="listitem">
@@ -217,7 +178,7 @@ Copy the value of the <span class="strong strong"><strong>properties.resourceGUI
 <img src="images/ec-private-link-azure-properties.png" alt="Private endpoint Properties" width="75%">
 </div>
 </div>
-<h4><a id="ece-azure-create-traffic-filter-private-link-rule-set"></a>Create rules using the Private Link Endpoint Resource Name and Resource ID<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-azure-create-traffic-filter-private-link-rule-set"></a>Create rules using the Private Link Endpoint Resource Name and Resource ID<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <p>When you have your private endpoint name and ID, you can create a private link traffic filter rule set.</p>
 <div class="olist orderedlist">
 <ol class="orderedlist">
@@ -240,18 +201,69 @@ Create your rule set, providing a meaningful name and description.
 Enter you Private Endpoint Resource Name and Resource ID.
 </li>
 <li class="listitem">
-<p>Select if this rule set should be automatically attached to new deployments.</p>
+Select if this rule set should be automatically attached to new deployments.
+</li>
+</ol>
+</div>
 <div class="note admon">
 <div class="icon"></div>
 <div class="admon_content">
 <p>Each rule set is bound to a particular region and can be only assigned to deployments in the same region.</p>
 </div>
 </div>
+<p>Creating the filter approves the Private Link connection.</p>
+<p>Let&#8217;s test the connection:</p>
+<div class="olist orderedlist">
+<ol class="orderedlist">
+<li class="listitem">
+<p>Find out the Elasticsearch cluster ID of your deployment. You can do that by clicking <span class="strong strong"><strong>Copy cluster id</strong></span> link in the Cloud UI. It looks something like <code class="literal">9c794b7c08fa494b9990fa3f6f74c2f8</code>.</p>
+<div class="tip admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>The Elasticsearch cluster ID is <span class="strong strong"><strong>different</strong></span> from the deployment ID, custom alias endpoint, and Cloud ID values that feature prominently in the user console.</p>
+</div>
+</div>
+</li>
+<li class="listitem">
+<p>To access your Elasticsearch cluster over Private Link, use the following URL structure:</p>
+<p><code class="literal">https://{elasticsearch_cluster_ID}.{private_hosted_zone_domain_name}:9243</code></p>
+<p>For example:</p>
+<p><code class="literal">https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243</code></p>
+</li>
+<li class="listitem">
+<p>You can test the Azure portal part of the setup with the following command (substitute the region and Elasticsearch ID with your cluster).</p>
+<p>The output should look like this:</p>
+<div class="pre_wrapper lang-sh">
+<pre class="programlisting prettyprint lang-sh">$ curl -v https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243
+* Rebuilt URL to: https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243/
+*   Trying 192.168.46.5...         # &lt;== note this IP address
+..
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_256_GCM_SHA384
+* 	 server certificate verification OK
+* 	 common name: *.privatelink.elastic-cloud.com (matched)
+..
+&lt; HTTP/1.1 403 Forbidden
+{"ok":false,"message":"Forbidden"}</pre>
+</div>
+<p>Check the IP address <code class="literal">192.168.46.5</code> it should be the same as the IP address of your private endpoint.</p>
+<p>The connection is established, and a valid certificate is presented to the client. The <code class="literal">403 Forbidden</code> is expected, you haven&#8217;t associate the rule set with any deployment yet.</p>
+</li>
+<li class="listitem">
+<p>In the event that the Private Link connection is not approved by Elastic Cloud, you&#8217;ll see output with an error message like the following. Double check that the filter you&#8217;ve created in the previous step uses the right resource name and GUID.</p>
+<div class="pre_wrapper lang-sh">
+<pre class="programlisting prettyprint lang-sh">$ curl -v https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243
+* Rebuilt URL to: https://6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com:9243/
+*   Trying 192.168.46.5...
+* connect to 192.168.46.5 port 9243 failed: No route to host
+* Failed to connect to 6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com port 9243: No route to host
+* Closing connection 0
+curl: (7) Failed to connect to 6b111580caaa4a9e84b18ec7c600155e.privatelink.eastus2.azure.elastic-cloud.com port 9243: No route to host</pre>
+</div>
 </li>
 </ol>
 </div>
 <p>The next step is to <a class="xref" href="ece-traffic-filtering-vpc.html#ece-associate-traffic-filter-private-link-rule-set" title="Associate a private link rule set with your deployment">associate the rule set</a> with your deployments.</p>
-<h4><a id="ece-azure-associate-traffic-filter-private-link-rule-set"></a>Associate a private link rule set with your deployment<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-azure-associate-traffic-filter-private-link-rule-set"></a>Associate a private link rule set with your deployment<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <p>To associate a private link rule set with your deployment:</p>
 <div class="olist orderedlist">
 <ol class="orderedlist">
@@ -266,7 +278,7 @@ Select the filter you want to apply and click <span class="strong strong"><stron
 </li>
 </ol>
 </div>
-<h4><a id="ece-azure-access-the-deployment-over-private-link"></a>Access the deployment over a private link<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-azure-access-the-deployment-over-private-link"></a>Access the deployment over a private link<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <p>For traffic to connect with the deployment over Azure Private Link, the client making the request needs to be located within the VNet where you&#8217;ve created the private endpoint. You can also setup network traffic to flow through the originating VNet from somewhere else, such as another VNet or a VPN from your corporate network. This assumes that the private endpoint and the DNS record are also available within that context. See your service provider documentation for setup instructions.</p>
 <div class="important admon">
 <div class="icon"></div>
@@ -281,7 +293,7 @@ Select the filter you want to apply and click <span class="strong strong"><stron
 &lt; HTTP/1.1 200 OK
 ..</pre>
 </div>
-<h3><a id="ece-azure-edit-traffic-filter-private-link-rule-set"></a>Edit a private link connection<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h3>
+<h3><a id="ece-azure-edit-traffic-filter-private-link-rule-set"></a>Edit a private link connection<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h3>
 <p>You can edit a rule set name or to change the VPC endpoint ID.</p>
 <div class="olist orderedlist">
 <ol class="orderedlist">
@@ -296,7 +308,7 @@ Click the <span class="strong strong"><strong>Edit</strong></span> icon.
 </li>
 </ol>
 </div>
-<h4><a id="ece-azure-delete-traffic-filter-private-link-rule-set"></a>Delete a private link rule set<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-azure-delete-traffic-filter-private-link-rule-set"></a>Delete a private link rule set<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <p>If you need to remove a rule set, you must first remove any associations with deployments.</p>
 <p>To delete a rule set with all its rules:</p>
 <div class="olist orderedlist">
@@ -315,7 +327,7 @@ Click the <span class="strong strong"><strong>Remove</strong></span> icon. The i
 </li>
 </ol>
 </div>
-<h4><a id="ece-azure-remove-association-traffic-filter-private-link-rule-set"></a>Remove a private link rule set association from your deployment<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
+<h4><a id="ece-azure-remove-association-traffic-filter-private-link-rule-set"></a>Remove a private link rule set association from your deployment<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/shared/ec-ce-traffic-filtering-vnet.asciidoc">edit</a></h4>
 <p>To remove an association through the UI:</p>
 <div class="olist orderedlist">
 <ol class="orderedlist">
@@ -333,7 +345,7 @@ On the <span class="strong strong"><strong>Security</strong></span> page, under 
 <a href="ece-traffic-filtering-vpc.html">« AWS Privatelink traffic filters</a>
 </span>
 <span class="next">
-<a href="ece-manage-kibana.html">Manage your Kibana instance »</a>
+<a href="ece-traffic-filtering-psc.html">GCP Private Service Connect traffic filters »</a>
 </span>
 </div>
 </div>

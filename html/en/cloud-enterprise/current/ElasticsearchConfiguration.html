@@ -130,12 +130,12 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="ElasticsearchConfiguration"></a><code class="literal">ElasticsearchConfiguration</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
+<h3 class="title"><a id="ElasticsearchConfiguration"></a><code class="literal">ElasticsearchConfiguration</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
 </div></div></div>
 <p>The Elasticsearch cluster settings. When specified at the top level, provides a field-by-field default. When specified at the topology level, provides the override settings.</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_properties_201"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_properties_203"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="variablelist">
 <dl class="variablelist">
@@ -201,7 +201,7 @@ A list of admin-uploaded plugin objects that are available for this user.
 </span>
 </dt>
 <dd>
-An arbitrary JSON object allowing cluster owners to set their parameters (only one of this and &#39;user_settings_yaml&#39; is allowed), provided they are on the whitelist (&#39;user_settings_whitelist&#39;) and not on the blacklist (&#39;user_settings_blacklist&#39;). NOTES: (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Elasticsearch settings)
+An arbitrary JSON object allowing cluster owners to set their parameters (only one of this and &#39;user_settings_yaml&#39; is allowed), provided the parameters arey are on the allowlist and not on the denylist. NOTES: (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Elasticsearch settings)
 </dd>
 <dt>
 <span class="term">
@@ -225,7 +225,7 @@ An arbitrary YAML object allowing ECE admins owners to set clusters&#39; paramet
 </span>
 </dt>
 <dd>
-An arbitrary YAML object allowing cluster owners to set their parameters (only one of this and &#39;user_settings_json&#39; is allowed), provided they are on the whitelist (&#39;user_settings_whitelist&#39;) and not on the blacklist (&#39;user_settings_blacklist&#39;). NOTES: (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Elasticsearch settings)
+An arbitrary YAML object allowing cluster owners to set their parameters (only one of this and &#39;user_settings_json&#39; is allowed), provided the parameters arey are on the allowlist and not on the denylist. NOTES: (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Elasticsearch settings)
 </dd>
 <dt>
 <span class="term">
@@ -241,7 +241,7 @@ The version of the Elasticsearch cluster (must be one of the ECE supported versi
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_example_203"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_example_207"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="pre_wrapper lang-json">
 <pre class="programlisting prettyprint lang-json">{

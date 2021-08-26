@@ -34,12 +34,12 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="ItemsCosts"></a><code class="literal">ItemsCosts</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
+<h3 class="title"><a id="ItemsCosts"></a><code class="literal">ItemsCosts</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
 </div></div></div>
 <p>Costs associated to a set of Elastic Cloud resources for an organization. All of the costs are expressed in Elastic Consumption Unit (ECU).</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_properties_261"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_properties_264"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="variablelist">
 <dl class="variablelist">
@@ -73,7 +73,7 @@ Costs of the list of resources
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_example_265"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_example_270"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="pre_wrapper lang-json">
 <pre class="programlisting prettyprint lang-json">{
@@ -84,7 +84,7 @@ Costs of the list of resources
    },
    "data_transfer_and_storage" : [
       {
-         "cost" : 0,
+         "cost" : 0.1,
          "name" : "string",
          "quantity" : {
             "formatted_value" : "string",
@@ -92,7 +92,7 @@ Costs of the list of resources
          },
          "rate" : {
             "formatted_value" : "string",
-            "value" : 0
+            "value" : 0.1
          },
          "sku" : "string",
          "type" : "string"
@@ -108,8 +108,8 @@ Costs of the list of resources
             "end" : "2019-01-01T00:00:00Z",
             "start" : "2019-01-01T00:00:00Z"
          },
-         "price" : 0,
-         "price_per_hour" : 0,
+         "price" : 0.1,
+         "price_per_hour" : 0.1,
          "sku" : "string"
       }
    ]

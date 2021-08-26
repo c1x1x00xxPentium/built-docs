@@ -34,18 +34,18 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="DtsDimensionCosts"></a><code class="literal">DtsDimensionCosts</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
+<h3 class="title"><a id="DtsDimensionCosts"></a><code class="literal">DtsDimensionCosts</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
 </div></div></div>
 <p>The costs associated to a Data Transfer and Storage (DTS) dimension for an organization. All of the costs, credits, and trials are expressed in Elastic Consumption Units (ECU).</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_properties_183"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_properties_185"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="variablelist">
 <dl class="variablelist">
 <dt>
 <span class="term">
-<code class="literal">cost</code> (<code class="literal">integer</code> as <code class="literal">int64</code>, required)
+<code class="literal">cost</code> (<code class="literal">number</code> as <code class="literal">double</code>, required)
 </span>
 </dt>
 <dd>
@@ -97,11 +97,11 @@ Type of the DTS dimension usage
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_example_185"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_example_189"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="pre_wrapper lang-json">
 <pre class="programlisting prettyprint lang-json">{
-   "cost" : 0,
+   "cost" : 0.1,
    "name" : "string",
    "quantity" : {
       "formatted_value" : "string",
@@ -109,7 +109,7 @@ Type of the DTS dimension usage
    },
    "rate" : {
       "formatted_value" : "string",
-      "value" : 0
+      "value" : 0.1
    },
    "sku" : "string",
    "type" : "string"

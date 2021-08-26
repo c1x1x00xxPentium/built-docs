@@ -30,7 +30,7 @@
 </div>
 <div class="chapter">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="ece-enable-auditing"></a>Enable auditing<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-securing-auditing.asciidoc">edit</a></h2>
+<h2 class="title"><a id="ece-enable-auditing"></a>Enable auditing<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-securing-auditing.asciidoc">edit</a></h2>
 </div></div></div>
 <p>With auditing enabled you can keep track of security-related events, such as successful and unsuccessful authorization attempts on the cluster. In Elastic Cloud Enterprise, in order to see audit events for both Elasticsearch and Kibana, you need to enable auditing for each component separately.</p>
 <p>To enable auditing for Elasticsearch:</p>
@@ -47,7 +47,7 @@
 From your deployment menu, go to the <span class="strong strong"><strong>Edit</strong></span> page.
 </li>
 <li class="listitem">
-At the bottom of the first Elasticsearch node, expand the <span class="strong strong"><strong>User settings overrides</strong></span> caret.
+In the <span class="strong strong"><strong>Elasticsearch</strong></span> section, click <span class="strong strong"><strong>Edit user settings and plugins</strong></span>. (For deployments with existing user settings, you may have to expand the <span class="strong strong"><strong>Edit elasticsearch.yml</strong></span> caret for the first node instead.)
 </li>
 <li class="listitem">
 Add the setting <code class="literal">xpack.security.audit.enabled: true</code>.
@@ -72,7 +72,7 @@ Click <span class="strong strong"><strong>Save</strong></span>.
 From your deployment menu, go to the <span class="strong strong"><strong>Edit</strong></span> page.
 </li>
 <li class="listitem">
-At the bottom of the Kibana instance, expand the <span class="strong strong"><strong>User settings overrides</strong></span> caret.
+In the <span class="strong strong"><strong>Kibana</strong></span> section, click <span class="strong strong"><strong>Edit user settings</strong></span>. (For deployments with existing user settings, you may have to expand the <span class="strong strong"><strong>Edit kibana.yml</strong></span> caret instead.)
 </li>
 <li class="listitem">
 Add the setting <code class="literal">xpack.security.audit.enabled: true</code>.

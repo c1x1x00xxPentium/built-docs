@@ -34,12 +34,12 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="EnterpriseSearchConfiguration"></a><code class="literal">EnterpriseSearchConfiguration</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
+<h3 class="title"><a id="EnterpriseSearchConfiguration"></a><code class="literal">EnterpriseSearchConfiguration</code><a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h3>
 </div></div></div>
 <p><em>Intentionally left blank</em></p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_properties_226"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_properties_228"></a>Properties<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="variablelist">
 <dl class="variablelist">
@@ -65,7 +65,7 @@ This structure defines a curated subset of the Enterprise Search settings. (This
 </span>
 </dt>
 <dd>
-An arbitrary JSON object allowing (non-admin) cluster owners to set their parameters (only one of this and &#39;user_settings_yaml&#39; is allowed), provided they are on the whitelist (&#39;user_settings_whitelist&#39;) and not on the blacklist (&#39;user_settings_blacklist&#39;). (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Enterprise Search settings)
+An arbitrary JSON object allowing (non-admin) cluster owners to set their parameters (only one of this and &#39;user_settings_yaml&#39; is allowed), provided the parameters are on the allowlist and not on the denylist. (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Enterprise Search settings)
 </dd>
 <dt>
 <span class="term">
@@ -89,7 +89,7 @@ An arbitrary YAML object allowing ECE admins to set clusters&#39; parameters (on
 </span>
 </dt>
 <dd>
-An arbitrary YAML object allowing (non-admin) cluster owners to set their parameters (only one of this and &#39;user_settings_json&#39; is allowed), provided they are on the whitelist (&#39;user_settings_whitelist&#39;) and not on the blacklist (&#39;user_settings_blacklist&#39;). (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Enterprise Search settings)
+An arbitrary YAML object allowing (non-admin) cluster owners to set their parameters (only one of this and &#39;user_settings_json&#39; is allowed), provided the parameters are on the allowlist and not on the denylist. (This field together with &#39;user_settings_override*&#39; and &#39;system_settings&#39; defines the total set of Enterprise Search settings)
 </dd>
 <dt>
 <span class="term">
@@ -105,7 +105,7 @@ The version of the Enterprise Search cluster (must be one of the ECE supported v
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h4 class="title"><a id="ece_example_229"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/ms-59/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
+<h4 class="title"><a id="ece_example_233"></a>Example<a class="edit_me edit_me_private" rel="nofollow" title="Editing on GitHub is available to Elastic" href="https://github.com/elastic/cloud/edit/master/docs/cloud-enterprise/ce-api-swagger.asciidoc">edit</a></h4>
 </div></div></div>
 <div class="pre_wrapper lang-json">
 <pre class="programlisting prettyprint lang-json">{
