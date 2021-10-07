@@ -857,9 +857,10 @@ include the parameter will return an error.</p>
 <summary class="title">The <code class="literal">use_ingest</code> setting on Monitoring exporter configurations has been removed.</summary>
 <div class="content">
 <p><span class="strong strong"><strong>Details</strong></span><br>
-The <code class="literal">xpack.monitoring.exporters.*.use_ingest</code> property was deprecated in 7.16.0 and
-has been removed. This parameter controlled the creation of pipelines for monitoring
-indices that previously had no function.</p>
+The <code class="literal">xpack.monitoring.exporters.*.use_ingest</code> property was deprecated in 7.16.0. This
+parameter controlled the creation of pipelines for monitoring indices. Those pipelines
+for monitoring indices previously had no function and are now removed. This setting will
+be removed in a future release.</p>
 <p><span class="strong strong"><strong>Impact</strong></span><br>
 Discontinue the use of the <code class="literal">xpack.monitoring.exporters.*.use_ingest</code> setting.</p>
 </div>
@@ -871,7 +872,7 @@ Discontinue the use of the <code class="literal">xpack.monitoring.exporters.*.us
 The <code class="literal">xpack.monitoring.exporters.*.index.pipeline.master_timeout</code> property was
 deprecated in 7.16.0. This parameter set the timeout when waiting for the remote
 Monitoring cluster to create pipelines. Those pipelines for monitoring indices previously
-had no function and are now removed in 8.0.0.</p>
+had no function and are no longer created. This setting will be removed in a future release.</p>
 <p><span class="strong strong"><strong>Impact</strong></span><br>
 Discontinue the use of the <code class="literal">xpack.monitoring.exporters.*.index.pipeline.master_timeout</code> setting.</p>
 </div>
