@@ -4352,12 +4352,12 @@ elasticsearch-java:
   Java Client/docs/7.x: ef982300ee3aa3914127362c27ec456064e660b2
   Java Client/docs/main: 40961e49a0e5c97715174af9c0fc9991f9edcd10
 elasticsearch-js:
-  Elasticsearch Guide/docs/doc_examples/main: 8fffae2f76f80183ed3fab924e4a0a926536809d
+  Elasticsearch Guide/docs/doc_examples/main: local
   JavaScript Client/docs/16.x: 388c5e8e7ec1c0a097ee4960b2297073a484a33e
   JavaScript Client/docs/5.x: abfd356b619dd9e7f746570a6abcd337932887c4
   JavaScript Client/docs/6.x: 231cfade24657ce2d8cdcac293e142b3e1b0a07b
   JavaScript Client/docs/7.x: 26887ca76b0dd47e6e2605b381ac5057732ce53d
-  JavaScript Client/docs/main: a26692c7e40af6f6cebce396f6f22ba182a6f201
+  JavaScript Client/docs/main: local
 elasticsearch-net:
   .NET Clients/docs/1.x: b5a34b117b6ee0859decab510f4c3ccf51aa7278
   .NET Clients/docs/2.x: 68c8b62096ae37f52004b2f5582da42c866451c0
